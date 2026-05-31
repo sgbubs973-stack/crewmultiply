@@ -3,276 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CREW× — Multiply Your Crew Without Hiring Anyone</title>
-  <meta name="description" content="Stop losing jobs to missed calls. CREW× gives tradespeople phone agents, email agents, and review automation — no software to learn, no contracts.">
-  <meta property="og:title" content="CREW× — Multiply Your Crew Without Hiring Anyone">
-  <meta property="og:description" content="78% of customers hire whoever responds first. Make sure that's you.">
+  <title>CREW× — Do More With The Same Crew</title>
+  <meta name="description" content="Think you can't afford an AI solution? You can't afford to keep losing jobs. CREW× handles your calls, leads, and reviews while you work.">
+  <meta property="og:title" content="CREW× — Do More With The Same Crew">
+  <meta property="og:description" content="78% of customers choose whoever responds first. Make sure that's you.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://crewmultiply.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="[REDACTED_CONN_STRING]://400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'DM Sans', sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body { font-family: 'DM Sans', sans-serif; background: #f4f6fa; color: #1a1a1a; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    /* NAV */
-    .nav { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.04); }
-    .nav-logo { font-weight: 900; font-size: 1.3rem; letter-spacing: -0.02em; }
-    .nav-logo .x-mark { color: #2563eb; }
-    .nav-cta { font-size: 0.8rem; color: #fff; background: #1a1a1a; padding: 0.5rem 1.2rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
-    .nav-cta:hover { background: #2563eb; }
+    .page { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; padding: 1.5rem 2.5rem; max-width: 960px; margin: 0 auto; }
+    @media (max-width: 600px) { .page { padding: 1.2rem 1.2rem; } }
 
-    /* HERO */
-    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 7rem 2rem 4rem; }
-    .hero-logo { font-size: clamp(3.5rem, 10vw, 6rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 0.5rem; line-height: 1; }
-    .hero-logo .x-mark { color: #2563eb; }
-    .hero-tagline { font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: #333; max-width: 550px; margin-bottom: 1rem; font-weight: 500; }
-    .hero-sub { font-size: 0.9rem; color: #777; max-width: 480px; line-height: 1.6; }
-    .hero-sub strong { color: #1a1a1a; }
+    /* HEADER */
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1.2rem; background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border-radius: 10px; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: -0.02em; }
+    .logo .x { color: #2563eb; }
+    .logo-tag { font-size: 0.6rem; color: #64748b; font-weight: 500; margin-left: 0.6rem; letter-spacing: 0.02em; }
+    .header-cta { font-size: 0.78rem; color: #fff; background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 0.5rem 1.3rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.25s; box-shadow: 0 2px 8px rgba(37,99,235,0.25); }
+    .header-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,0.4); }
 
-    /* MULTIPLIER SLIDER */
-    .slider-section { margin-top: 2.5rem; text-align: center; }
-    .slider-result { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 0.5rem; transition: all 0.15s; }
-    .slider-result .val { color: #2563eb; }
-    .slider-context { font-size: 0.8rem; color: #999; margin-bottom: 1rem; }
-    input[type="range"] { width: 280px; max-width: 80vw; height: 6px; -webkit-appearance: none; background: #e5e7eb; border-radius: 3px; outline: none; }
-    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: #2563eb; border-radius: 50%; cursor: grab; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
-    input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; background: #2563eb; border-radius: 50%; cursor: grab; border: none; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
-    .slider-labels { display: flex; justify-content: space-between; width: 280px; max-width: 80vw; margin: 0.4rem auto 0; font-size: 0.7rem; color: #aaa; }
+    /* MAIN */
+    .main { display: flex; align-items: center; gap: 3.5rem; }
+    @media (max-width: 768px) { .main { flex-direction: column; gap: 2rem; text-align: center; } }
+    
+    .left { flex: 1.2; }
+    .left h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1rem; }
+    .left h1 .highlight { color: #2563eb; }
+    .left .sub { font-size: 0.88rem; color: #4a5568; line-height: 1.7; margin-bottom: 1.5rem; }
+    .left .sub strong { color: #1a1a1a; }
+    
+    /* Product chips */
+    .products-inline { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem; }
+    @media (max-width: 768px) { .products-inline { justify-content: center; } }
+    .products-inline .chip { font-size: 0.73rem; font-weight: 600; padding: 0.4rem 0.85rem; background: rgba(255,255,255,0.8); border: 1px solid rgba(37,99,235,0.1); border-radius: 6px; color: #334155; transition: all 0.25s; cursor: default; backdrop-filter: blur(4px); }
+    .products-inline .chip:hover { border-color: #2563eb; color: #2563eb; background: rgba(37,99,235,0.06); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,0.12); }
+    
+    .cta-row { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+    @media (max-width: 768px) { .cta-row { justify-content: center; } }
+    .cta-btn { padding: 0.75rem 1.8rem; background: linear-gradient(135deg, #1e293b, #334155); color: #fff; border-radius: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 700; transition: all 0.25s; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+    .cta-btn:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.35); }
+    .cta-or { font-size: 0.75rem; color: #94a3b8; }
+    .cta-email { font-size: 0.8rem; color: #2563eb; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+    .cta-email:hover { color: #1d4ed8; }
 
-    /* STATS BAR */
-    .stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
-    @media (max-width: 600px) { .stats-bar { grid-template-columns: 1fr; } }
-    .stat-item { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid #eee; }
-    .stat-item:last-child { border-right: none; }
-    @media (max-width: 600px) { .stat-item { border-right: none; border-bottom: 1px solid #eee; } .stat-item:last-child { border-bottom: none; } }
-    .stat-num { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; color: #dc2626; }
-    .stat-num.blue { color: #2563eb; }
-    .stat-desc { font-size: 0.8rem; color: #666; margin-top: 0.3rem; max-width: 220px; margin-left: auto; margin-right: auto; }
-
-    /* PRODUCTS */
-    .products { padding: 4rem 2rem; max-width: 680px; margin: 0 auto; }
-    .products h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.3rem; }
-    .products > p { color: #666; margin-bottom: 2rem; font-size: 0.9rem; }
-    .product-item { border: 1px solid #e5e7eb; border-radius: 10px; margin-bottom: 0.6rem; overflow: hidden; transition: all 0.2s; }
-    .product-item:hover { border-color: #2563eb; box-shadow: 0 2px 12px rgba(37,99,235,0.06); }
-    .product-header { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 1.4rem; cursor: pointer; user-select: none; }
-    .product-header h3 { font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
-    .product-header .result-tag { font-size: 0.65rem; background: #f0fdf4; color: #166534; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 600; }
-    .product-header .price { font-size: 0.85rem; font-weight: 700; color: #2563eb; }
-    .product-header .arrow { transition: transform 0.3s; font-size: 1rem; color: #bbb; margin-left: 0.8rem; }
-    .product-item.open .product-header .arrow { transform: rotate(180deg); }
-    .product-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; padding: 0 1.4rem; }
-    .product-item.open .product-body { max-height: 300px; padding: 0 1.4rem 1.4rem; }
-    .product-body p { font-size: 0.82rem; color: #555; line-height: 1.7; }
-    .product-body .evidence { font-size: 0.7rem; color: #888; margin-top: 0.6rem; font-style: italic; }
-
-    /* TRADES CARDS */
-    .trades { padding: 3.5rem 2rem; background: #fafafa; }
-    .trades-inner { max-width: 680px; margin: 0 auto; }
-    .trades h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.3rem; }
-    .trades-inner > p { color: #666; margin-bottom: 1.5rem; font-size: 0.9rem; }
-    .trade-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
-    @media (max-width: 600px) { .trade-grid { grid-template-columns: repeat(2, 1fr); } }
-    .trade-card { background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 1.2rem; text-align: center; transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94); cursor: default; }
-    .trade-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-color: #2563eb; }
-    .trade-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
-    .trade-card h4 { font-size: 0.8rem; font-weight: 700; margin-bottom: 0.2rem; }
-    .trade-card p { font-size: 0.7rem; color: #888; }
-
-    /* POSITIONING STRIP */
-    .position-strip { padding: 3rem 2rem; max-width: 600px; margin: 0 auto; text-align: center; }
-    .position-strip h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 0.8rem; }
-    .position-strip p { font-size: 0.85rem; color: #555; line-height: 1.7; }
-    .position-strip .promise { display: inline-block; margin-top: 1rem; font-size: 0.75rem; color: #2563eb; font-weight: 700; border: 1px solid #2563eb; padding: 0.4rem 1rem; border-radius: 4px; }
-
-    /* CTA */
-    .cta { padding: 4rem 2rem; text-align: center; max-width: 480px; margin: 0 auto; }
-    .cta h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem; }
-    .cta p { color: #666; font-size: 0.85rem; margin-bottom: 1.5rem; }
-    .cta form input, .cta form select { width: 100%; padding: 0.7rem 1rem; border: 1px solid #e5e7eb; border-radius: 6px; font-family: inherit; font-size: 0.85rem; margin-bottom: 0.5rem; transition: border-color 0.2s; background: #fff; }
-    .cta form input:focus, .cta form select:focus { outline: none; border-color: #2563eb; }
-    .cta-btn { width: 100%; padding: 0.85rem; background: #1a1a1a; color: #fff; border: none; border-radius: 6px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit; }
-    .cta-btn:hover { background: #2563eb; }
-    .cta-fine { font-size: 0.7rem; color: #aaa; margin-top: 0.6rem; line-height: 1.5; }
-    .cta-fine a { color: #666; }
+    /* RIGHT — Calculator */
+    .right { flex: 1; }
+    .calc { background: linear-gradient(160deg, #ffffff 0%, #eef2ff 50%, #e8edff 100%); border: 1px solid rgba(37,99,235,0.12); border-radius: 16px; padding: 2rem; box-shadow: 0 12px 40px rgba(37,99,235,0.08), 0 1px 3px rgba(0,0,0,0.04); position: relative; overflow: hidden; }
+    .calc::before { content: ''; position: absolute; top: -30%; right: -30%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 65%); pointer-events: none; }
+    .calc::after { content: ''; position: absolute; bottom: -20%; left: -20%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 65%); pointer-events: none; }
+    .calc h3 { font-size: 0.88rem; font-weight: 800; margin-bottom: 1.2rem; position: relative; }
+    .calc label { font-size: 0.68rem; color: #64748b; display: block; margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; position: relative; }
+    .calc input[type="number"], .calc select { width: 100%; padding: 0.65rem 0.9rem; border: 1px solid rgba(37,99,235,0.12); border-radius: 8px; font-family: inherit; font-size: 0.85rem; margin-bottom: 1rem; background: rgba(255,255,255,0.9); transition: all 0.2s; position: relative; }
+    .calc input[type="number"]:focus, .calc select:focus { outline: none; border-color: #2563eb; background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+    .calc-result { background: rgba(255,255,255,0.95); border: 1px solid rgba(37,99,235,0.08); border-radius: 10px; padding: 1.2rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .calc-result .amount { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #dc2626, #991b1b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .calc-result .per { font-size: 0.72rem; color: #64748b; margin-top: 0.2rem; font-weight: 500; }
+    .calc-result .context { font-size: 0.68rem; color: #64748b; margin-top: 0.6rem; line-height: 1.5; }
 
     /* FOOTER */
-    footer { padding: 2rem; text-align: center; font-size: 0.7rem; color: #bbb; border-top: 1px solid #f0f0f0; }
-    footer a { color: #888; text-decoration: none; }
-    footer .x-mark { color: #2563eb; }
+    .footer { padding-top: 2rem; display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 1rem; }
+    .footer-left { font-size: 0.7rem; color: #94a3b8; }
+    .footer-left .x { color: #2563eb; }
+    .footer-right { font-size: 0.65rem; color: #94a3b8; text-align: right; line-height: 1.6; }
+    .footer-right a { color: #64748b; text-decoration: none; transition: color 0.2s; }
+    .footer-right a:hover { color: #2563eb; }
+
+    /* BELOW FOLD */
+    .below { max-width: 960px; margin: 0 auto; padding: 4rem 2.5rem; }
+    .below h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .below > p { font-size: 0.82rem; color: #64748b; margin-bottom: 1.5rem; }
+    .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .detail-card { padding: 1.4rem; border: 1px solid rgba(37,99,235,0.06); border-radius: 12px; transition: all 0.25s; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); }
+    .detail-card:hover { border-color: rgba(37,99,235,0.2); box-shadow: 0 8px 24px rgba(37,99,235,0.08); transform: translateY(-3px); background: #fff; }
+    .detail-card h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .detail-card .price-tag { font-size: 0.7rem; color: #2563eb; font-weight: 700; margin-bottom: 0.5rem; }
+    .detail-card p { font-size: 0.75rem; color: #4a5568; line-height: 1.6; }
+    
+    .position { max-width: 960px; margin: 0 auto; padding: 2rem 2.5rem 3.5rem; text-align: center; }
+    .position p { font-size: 0.88rem; color: #4a5568; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+    .position .own { display: inline-block; margin-top: 1rem; font-size: 0.72rem; color: #2563eb; font-weight: 700; border: 1.5px solid #2563eb; padding: 0.4rem 1rem; border-radius: 5px; transition: all 0.2s; }
+    .position .own:hover { background: #2563eb; color: #fff; }
   </style>
 </head>
 <body>
 
-  <!-- Nav -->
-  <nav class="nav">
-    <span class="nav-logo">CREW<span class="x-mark">&times;</span></span>
-    <a href="#talk" class="nav-cta">Let's talk</a>
-  </nav>
+  <div class="page">
+    <header class="header">
+      <div><span class="logo">CREW<span class="x">&times;</span></span><span class="logo-tag">Your crew, multiplied.</span></div>
+      <a href="mailto:steve@crewmultiply.com?subject=Let's talk" class="header-cta">Let's talk</a>
+    </header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-logo">CREW<span class="x-mark">&times;</span></div>
-    <p class="hero-tagline">Multiply your crew without hiring anyone.</p>
-    <p class="hero-sub">You're losing jobs while you're on jobs. <strong>78% of customers hire whoever responds first.</strong> We make sure that's you — every call, every text, every time.</p>
+    <div class="main">
+      <div class="left">
+        <h1>The AI you think you can't afford <span class="highlight">costs less than the jobs you're already losing.</span></h1>
+        <p class="sub">Runs your front office — calls, leads, reviews. <strong>Set up in days, not months.</strong> No learning curve. No new software. Just results running behind your business while you work.</p>
+        
+        <div class="products-inline">
+          <span class="chip">Phone Agent</span>
+          <span class="chip">Email Agent</span>
+          <span class="chip">Review Machine</span>
+          <span class="chip">Website</span>
+          <span class="chip">Appointment Reminders</span>
+        </div>
 
-    <div class="slider-section">
-      <div class="slider-result">Your output: <span class="val" id="multVal">5</span>x</div>
-      <div class="slider-context">How much coverage do you want?</div>
-      <input type="range" min="2" max="100" value="5" oninput="document.getElementById('multVal').textContent=this.value">
-      <div class="slider-labels"><span>2x</span><span>100x</span></div>
-    </div>
-  </section>
-
-  <!-- Stats Bar -->
-  <section class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-num">62%</div>
-      <div class="stat-desc">of your calls go unanswered while you're working</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">$126K</div>
-      <div class="stat-desc">average revenue lost per year to missed calls</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num blue">5 min</div>
-      <div class="stat-desc">respond in 5 min = 21x more likely to win the job</div>
-    </div>
-  </section>
-
-  <!-- Products -->
-  <section class="products">
-    <h2>What we run for you.</h2>
-    <p>You don't touch software. You just get results.</p>
-
-    <div class="product-item" onclick="toggle(this)">
-      <div class="product-header">
-        <h3>Phone Agent <span class="result-tag">45% more conversions</span></h3>
-        <div><span class="price">$97-150/mo</span><span class="arrow">&#9662;</span></div>
+        <div class="cta-row">
+          <a href="mailto:steve@crewmultiply.com?subject=Let's talk" class="cta-btn">See what you're losing</a>
+          <span class="cta-or">or</span>
+          <a href="mailto:steve@crewmultiply.com" class="cta-email">steve@crewmultiply.com</a>
+        </div>
       </div>
-      <div class="product-body">
-        <p>Every missed call gets a text back in under 60 seconds. Every lead qualified and followed up for 7 days. Hot leads alert your phone immediately. Works 24/7 — catches the 35-45% of calls that come after hours (the highest-value ones).</p>
-        <p class="evidence">Based on industry data: 45% conversion lift from sub-60s response time.</p>
+
+      <div class="right">
+        <div class="calc">
+          <h3>What are missed calls costing you?</h3>
+          <label>Missed calls per week</label>
+          <input type="number" id="calls" value="10" min="1" max="100" oninput="calculate()">
+          <label>Average job value</label>
+          <select id="jobval" onchange="calculate()">
+            <option value="200">$150-250 (cleaning, handyman)</option>
+            <option value="500" selected>$400-600 (plumbing, electrical)</option>
+            <option value="1500">$1,000-2,000 (HVAC, roofing)</option>
+            <option value="5000">$3,000+ (remodels, builds)</option>
+          </select>
+          <div class="calc-result">
+            <div class="amount" id="lostAmount">$10,400</div>
+            <div class="per">lost per month</div>
+            <div class="context" id="lostContext">Based on 10 missed calls/week. 85% never call back. 78% choose whoever answers first.</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="product-item" onclick="toggle(this)">
-      <div class="product-header">
-        <h3>Email Agent <span class="result-tag">Zero inbox chaos</span></h3>
-        <div><span class="price">$75-150/mo</span><span class="arrow">&#9662;</span></div>
-      </div>
-      <div class="product-body">
-        <p>Inbox sorted automatically. New leads flagged and responded in your voice. Quotes tracked — if someone goes quiet, the system nudges them. Morning text tells you what came in overnight. No more 120 days/year buried in admin.</p>
-        <p class="evidence">Average tradesperson spends 120 days/year on admin tasks (Sage survey, 3,000 SMEs).</p>
-      </div>
+    <div class="footer">
+      <div class="footer-left">CREW<span class="x">&times;</span> &mdash; Northern Virginia</div>
+      <div class="footer-right">Plumbers. HVAC. Electricians. Cleaners. Painters. Contractors.<br>No contracts. You own everything. <a href="mailto:steve@crewmultiply.com">Cancel anytime.</a></div>
     </div>
+  </div>
 
-    <div class="product-item" onclick="toggle(this)">
-      <div class="product-header">
-        <h3>Review Machine <span class="result-tag">270% more likely to buy</span></h3>
-        <div><span class="price">$75/mo</span><span class="arrow">&#9662;</span></div>
+  <!-- Below the fold -->
+  <section class="below">
+    <h2>How it works.</h2>
+    <p>We set it up. We run it. You get results.</p>
+    <div class="detail-grid">
+      <div class="detail-card">
+        <h4>Phone Agent</h4>
+        <div class="price-tag">$97-150/mo</div>
+        <p>Missed call? Text goes out in under 60 seconds. Leads qualified and followed up for 7 days automatically. Hot leads alert your phone. Works 24/7.</p>
       </div>
-      <div class="product-body">
-        <p>After every job, customer gets a text asking for a Google review. No awkward ask. Negative feedback routed to you privately before it hits Google. Reviews grow every week without you thinking about it.</p>
-        <p class="evidence">Businesses with 5+ reviews are 270% more likely to convert browsers to buyers.</p>
+      <div class="detail-card">
+        <h4>Email Agent</h4>
+        <div class="price-tag">$75-150/mo</div>
+        <p>Inbox sorted. Leads responded to in your voice. Quotes tracked — if someone ghosts, the system nudges them. Morning text with overnight activity.</p>
       </div>
-    </div>
-
-    <div class="product-item" onclick="toggle(this)">
-      <div class="product-header">
-        <h3>Website <span class="result-tag">You own it forever</span></h3>
-        <div><span class="price">$500 one-time</span><span class="arrow">&#9662;</span></div>
+      <div class="detail-card">
+        <h4>Review Machine</h4>
+        <div class="price-tag">$75/mo</div>
+        <p>After every job, customer gets a review request text. Bad feedback routed to you privately. Reviews grow without you thinking about it.</p>
       </div>
-      <div class="product-body">
-        <p>Professional, mobile-first site built in 24 hours. Click-to-call, reviews, Google Maps, contact form. Your domain, your hosting, your login. Not a $3K-25K agency job. Not a template. Custom to your business.</p>
-        <p class="evidence">87% of HVAC customer journeys begin on Google. 42% of local clicks go to the Map Pack.</p>
+      <div class="detail-card">
+        <h4>Website</h4>
+        <div class="price-tag">$500 one-time</div>
+        <p>Professional site in 24 hours. Click-to-call, reviews, maps, contact form. Your domain. You own it. Not a $3K agency job.</p>
       </div>
-    </div>
-
-    <div class="product-item" onclick="toggle(this)">
-      <div class="product-header">
-        <h3>No-Show Killer <span class="result-tag">Saves $135K/yr</span></h3>
-        <div><span class="price">Included</span><span class="arrow">&#9662;</span></div>
+      <div class="detail-card">
+        <h4>Appointment Reminders</h4>
+        <div class="price-tag">Included</div>
+        <p>Automatic texts before every appointment. Customers confirm or reschedule with one tap. No more wasted drives to empty houses.</p>
       </div>
-      <div class="product-body">
-        <p>Automatic text reminders before every appointment. Customers confirm or reschedule with one tap. No more showing up to an empty house or wasted drive time.</p>
-        <p class="evidence">Text reminders reduce no-shows 30-50%. One practice recovered $135K/year.</p>
+      <div class="detail-card">
+        <h4>Training</h4>
+        <div class="price-tag">$250+</div>
+        <p>Want to run it yourself? 90-minute hands-on session. We set things up together in your actual business. You leave with working tools.</p>
       </div>
     </div>
   </section>
 
-  <!-- Trades -->
-  <section class="trades">
-    <div class="trades-inner">
-      <h2>Built for people who work with their hands.</h2>
-      <p>If customers call, text, or email you — this works.</p>
-      <div class="trade-grid">
-        <div class="trade-card"><div class="trade-icon">&#x1F527;</div><h4>Plumbers</h4><p>Can't answer under the sink</p></div>
-        <div class="trade-card"><div class="trade-icon">&#x2744;&#xFE0F;</div><h4>HVAC</h4><p>Peak season = 71% missed</p></div>
-        <div class="trade-card"><div class="trade-icon">&#x26A1;</div><h4>Electricians</h4><p>First to respond wins</p></div>
-        <div class="trade-card"><div class="trade-icon">&#x1F9F9;</div><h4>Cleaners</h4><p>Fill schedule on autopilot</p></div>
-        <div class="trade-card"><div class="trade-icon">&#x1F3A8;</div><h4>Painters</h4><p>Never lose a quote follow-up</p></div>
-        <div class="trade-card"><div class="trade-icon">&#x1F3D7;&#xFE0F;</div><h4>Contractors</h4><p>Grow reviews without asking</p></div>
-      </div>
-    </div>
+  <section class="position">
+    <p>Not an agency. Not software you log into. The tools run behind your business — zero behavior change from you. If you leave, everything keeps running.</p>
+    <span class="own">You own everything we build. Always.</span>
   </section>
-
-  <!-- Positioning -->
-  <section class="position-strip">
-    <h2>Not an agency. Not software you log into.</h2>
-    <p>We set it up. We run it. You get results. The tools work behind your business — zero behavior change from you. If you want to leave, everything keeps running. No hostage situation. No contracts.</p>
-    <span class="promise">You own everything we build. Always.</span>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta" id="talk">
-    <h2>See what you're leaving on the table.</h2>
-    <p>15-minute call. I'll show you where jobs are slipping — and whether this makes sense for your business. No pitch if it doesn't fit.</p>
-    <form id="contactForm" onsubmit="handleSubmit(event)">
-      <input type="text" name="name" required placeholder="Your name">
-      <input type="text" name="business" required placeholder="Business name">
-      <input type="tel" name="phone" required placeholder="Best number">
-      <select name="problem">
-        <option value="">Biggest problem right now?</option>
-        <option value="calls">Missing calls on jobs</option>
-        <option value="followup">Leads go cold - no follow-up</option>
-        <option value="reviews">Need more Google reviews</option>
-        <option value="website">No website or it's outdated</option>
-        <option value="all">All of it</option>
-      </select>
-      <button type="submit" class="cta-btn">Let's talk</button>
-      <p class="cta-fine">Or email directly: <a href="mailto:steve@crewmultiply.com">steve@crewmultiply.com</a><br>No contracts. You own everything. Cancel anytime.</p>
-    </form>
-  </section>
-
-  <footer>
-    CREW<span class="x-mark">&times;</span> by CrewMultiply &mdash; Northern Virginia<br>
-    <a href="mailto:steve@crewmultiply.com">steve@crewmultiply.com</a>
-  </footer>
 
   <script>
-    function toggle(el) {
-      var wasOpen = el.classList.contains('open');
-      var items = document.querySelectorAll('.product-item');
-      for (var i = 0; i < items.length; i++) items[i].classList.remove('open');
-      if (!wasOpen) el.classList.add('open');
+    function calculate() {
+      var calls = parseInt(document.getElementById('calls').value) || 0;
+      var jobVal = parseInt(document.getElementById('jobval').value);
+      var monthlyLost = Math.round(calls * 4.3 * 0.85 * 0.78 * jobVal);
+      document.getElementById('lostAmount').textContent = '$' + monthlyLost.toLocaleString();
+      document.getElementById('lostContext').textContent = 'Based on ' + calls + ' missed calls/week. 85% never call back. 78% choose whoever answers first.';
     }
-
-    function handleSubmit(e) {
-      e.preventDefault();
-      var form = e.target;
-      var data = new FormData(form);
-      var name = data.get('name');
-      var business = data.get('business');
-      var phone = data.get('phone');
-      var problem = data.get('problem');
-      var subject = encodeURIComponent('CREW× Lead: ' + business);
-      var body = encodeURIComponent('Name: ' + name + '\nBusiness: ' + business + '\nPhone: ' + phone + '\nProblem: ' + problem);
-      window.location.href = 'mailto:steve@crewmultiply.com?subject=' + subject + '&body=' + body;
-      form.innerHTML = '<p style="padding:2rem;color:#166534;font-weight:700;">Got it. I\'ll be in touch within 24 hours.</p>';
-    }
+    calculate();
   </script>
 
 </body>
