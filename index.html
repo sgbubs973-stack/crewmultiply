@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CREW× . Do More With The Same Crew</title>
-  <meta name="description" content="Think you can't afford an AI solution? You can't afford to keep losing jobs. CREW× handles your calls, leads, and reviews while you work.">
-  <meta property="og:title" content="CREW× . Do More With The Same Crew">
-  <meta property="og:description" content="78% of customers choose whoever responds first. Make sure that's you.">
+  <title>CREW× | Do More With The Same Crew</title>
+  <meta name="description" content="CREW× builds practical systems for local businesses that catch missed calls, follow up quotes, request reviews, and keep work from slipping through the cracks.">
+  <meta property="og:title" content="CREW× | Do More With The Same Crew">
+  <meta property="og:description" content="Simple systems for local businesses that are too busy to chase every lead by hand.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://crewmultiply.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="[REDACTED_CONN_STRING]://400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'DM Sans', sans-serif; background: #f4f6fa; color: #1a1a1a; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
@@ -29,9 +29,10 @@
 
     /* MAIN */
     .main { display: flex; align-items: center; gap: 3.5rem; }
-    @media (max-width: 768px) { .main { flex-direction: column; gap: 2rem; text-align: center; } }
+    @media (max-width: 768px) { .main { flex-direction: column; gap: 2rem; text-align: center; align-items: stretch; } }
     
     .left { flex: 1.2; }
+    @media (max-width: 768px) { .left { flex: none; } }
     .left h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1rem; }
     .left h1 .highlight { color: #2563eb; }
     .left .sub { font-size: 0.88rem; color: #4a5568; line-height: 1.7; margin-bottom: 1.5rem; }
@@ -51,19 +52,17 @@
     .cta-email { font-size: 0.8rem; color: #2563eb; text-decoration: none; font-weight: 600; transition: color 0.2s; }
     .cta-email:hover { color: #1d4ed8; }
 
-    /* RIGHT . Calculator */
+    /* RIGHT . Story */
     .right { flex: 1; }
-    .calc { background: linear-gradient(160deg, #ffffff 0%, #eef2ff 50%, #e8edff 100%); border: 1px solid rgba(37,99,235,0.12); border-radius: 16px; padding: 2rem; box-shadow: 0 12px 40px rgba(37,99,235,0.08), 0 1px 3px rgba(0,0,0,0.04); position: relative; overflow: hidden; }
-    .calc::before { content: ''; position: absolute; top: -30%; right: -30%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 65%); pointer-events: none; }
-    .calc::after { content: ''; position: absolute; bottom: -20%; left: -20%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 65%); pointer-events: none; }
-    .calc h3 { font-size: 0.88rem; font-weight: 800; margin-bottom: 1.2rem; position: relative; }
-    .calc label { font-size: 0.68rem; color: #64748b; display: block; margin-bottom: 0.3rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; position: relative; }
-    .calc input[type="number"], .calc select { width: 100%; padding: 0.65rem 0.9rem; border: 1px solid rgba(37,99,235,0.12); border-radius: 8px; font-family: inherit; font-size: 0.85rem; margin-bottom: 1rem; background: rgba(255,255,255,0.9); transition: all 0.2s; position: relative; }
-    .calc input[type="number"]:focus, .calc select:focus { outline: none; border-color: #2563eb; background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
-    .calc-result { background: rgba(255,255,255,0.95); border: 1px solid rgba(37,99,235,0.08); border-radius: 10px; padding: 1.2rem; text-align: center; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-    .calc-result .amount { font-size: 2rem; font-weight: 900; background: linear-gradient(135deg, #dc2626, #991b1b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .calc-result .per { font-size: 0.72rem; color: #64748b; margin-top: 0.2rem; font-weight: 500; }
-    .calc-result .context { font-size: 0.68rem; color: #64748b; margin-top: 0.6rem; line-height: 1.5; }
+    @media (max-width: 768px) { .right { flex: none; } }
+    .story-panel { background: linear-gradient(160deg, #ffffff 0%, #eef2ff 50%, #e8edff 100%); border: 1px solid rgba(37,99,235,0.12); border-radius: 16px; padding: 2rem; box-shadow: 0 12px 40px rgba(37,99,235,0.08), 0 1px 3px rgba(0,0,0,0.04); position: relative; overflow: hidden; }
+    .story-panel::before { content: ''; position: absolute; top: -30%; right: -30%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 65%); pointer-events: none; }
+    .story-panel::after { content: ''; position: absolute; bottom: -20%; left: -20%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 65%); pointer-events: none; }
+    .story-panel h3 { font-size: 0.88rem; font-weight: 800; margin-bottom: 1.2rem; position: relative; }
+    .story-card p { font-size: 0.82rem; color: #4a5568; line-height: 1.75; margin-bottom: 1rem; position: relative; }
+    .story-card .story-step { padding: 0.85rem 0; border-top: 1px solid rgba(37,99,235,0.08); position: relative; }
+    .story-card .story-step strong { display: block; font-size: 0.78rem; color: #1a1a1a; margin-bottom: 0.25rem; }
+    .story-card .story-step span { display: block; font-size: 0.74rem; color: #64748b; line-height: 1.6; }
 
     /* FOOTER */
     .footer { padding-top: 2rem; display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 1rem; }
@@ -81,7 +80,7 @@
     .detail-card { padding: 1.4rem; border: 1px solid rgba(37,99,235,0.06); border-radius: 12px; transition: all 0.25s; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); }
     .detail-card:hover { border-color: rgba(37,99,235,0.2); box-shadow: 0 8px 24px rgba(37,99,235,0.08); transform: translateY(-3px); background: #fff; }
     .detail-card h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; }
-    .detail-card .price-tag { font-size: 0.7rem; color: #2563eb; font-weight: 700; margin-bottom: 0.5rem; }
+    .detail-card .detail-kicker { font-size: 0.7rem; color: #2563eb; font-weight: 700; margin-bottom: 0.5rem; }
     .detail-card p { font-size: 0.75rem; color: #4a5568; line-height: 1.6; }
     
     .position { max-width: 960px; margin: 0 auto; padding: 2rem 2.5rem 3.5rem; text-align: center; }
@@ -123,85 +122,84 @@
 
     <div class="main">
       <div class="left">
-        <h1>The AI you think you can't afford <span class="highlight">costs less than the jobs you're already losing.</span></h1>
-        <p class="sub">Runs your front office . calls, leads, reviews. <strong>Set up in days, not months.</strong> No learning curve. No new software. Just results running behind your business while you work.</p>
+        <h1>The work is there. <span class="highlight">The follow-up is where it slips.</span></h1>
+        <p class="sub">A customer calls while you are on a job. A quote waits in the inbox. A happy customer forgets to leave a review. CREW<span class="x">&times;</span> builds the quiet systems that catch those moments before they disappear.</p>
         
         <div class="products-inline">
-          <span class="chip">Phone Agent</span>
-          <span class="chip">Email Agent</span>
-          <span class="chip">Review Machine</span>
-          <span class="chip">Website</span>
-          <span class="chip">Appointment Reminders</span>
+          <span class="chip">Missed-call recovery</span>
+          <span class="chip">Quote follow-up</span>
+          <span class="chip">Review requests</span>
+          <span class="chip">Simple CRM</span>
+          <span class="chip">Owner dashboard</span>
         </div>
 
         <div class="cta-row">
-          <a href="mailto:steve@crewmultiply.com?subject=Let's talk" class="cta-btn">See what you're losing</a>
+          <a href="mailto:steve@crewmultiply.com?subject=Let's talk" class="cta-btn">Show me the gaps</a>
           <span class="cta-or">or</span>
           <a href="mailto:steve@crewmultiply.com" class="cta-email">steve@crewmultiply.com</a>
         </div>
       </div>
 
       <div class="right">
-        <div class="calc">
-          <h3>What are missed calls costing you?</h3>
-          <label>Missed calls per week</label>
-          <input type="number" id="calls" value="10" min="1" max="100" oninput="calculate()">
-          <label>Average job value</label>
-          <select id="jobval" onchange="calculate()">
-            <option value="200">$150-250 (cleaning, handyman)</option>
-            <option value="500" selected>$400-600 (plumbing, electrical)</option>
-            <option value="1500">$1,000-2,000 (HVAC, roofing)</option>
-            <option value="5000">$3,000+ (remodels, builds)</option>
-          </select>
-          <div class="calc-result">
-            <div class="amount" id="lostAmount">$10,400</div>
-            <div class="per">lost per month</div>
-            <div class="context" id="lostContext">Based on 10 missed calls/week. 85% never call back. 78% choose whoever answers first.</div>
+        <div class="story-panel story-card">
+          <h3>A normal day, cleaned up.</h3>
+          <p>The job is not lost because the owner does not care. It is lost because the owner is already doing the work.</p>
+          <div class="story-step">
+            <strong>The call gets caught.</strong>
+            <span>Missed calls and form leads land in one place instead of fading into memory.</span>
+          </div>
+          <div class="story-step">
+            <strong>The next step gets written.</strong>
+            <span>Replies, follow-ups, reminders, and review requests are ready before the day gets away.</span>
+          </div>
+          <div class="story-step">
+            <strong>The owner gets the keys.</strong>
+            <span>You see what is running, what it costs, and what still needs a human touch.</span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      <div class="footer-left">CREW<span class="x">&times;</span> . Northern Virginia</div>
-      <div class="footer-right">Plumbers. HVAC. Electricians. Cleaners. Painters. Contractors.<br>No contracts. You own everything. <a href="mailto:steve@crewmultiply.com">Cancel anytime.</a></div>
+      <div class="footer-left">CREW<span class="x">&times;</span> | Northern Virginia</div>
+      <div class="footer-right">Plumbers. HVAC. Electricians. Cleaners. Painters. Contractors.<br>You own everything. Tool costs explained before setup. <a href="mailto:steve@crewmultiply.com">Start a conversation.</a></div>
     </div>
   </div>
 
   <!-- Below the fold -->
   <section class="below">
     <h2>How it works.</h2>
-    <p>We build it, you own it. Run it yourself or keep us on to manage it , your call. Start with one, stack as you grow.</p>
+    <p>We start with the workflow you already have, find the places work leaks out, then build the simplest system that catches it. You see costs, setup gates, and timing before anything is bought.</p>
     <div class="detail-grid">
       <div class="detail-card">
-        <h4>Phone Agent</h4>
-        <div class="price-tag">Starting at $49/mo</div>
-        <p>Missed call? Text goes out in under 60 seconds. Leads qualified and followed up for 7 days automatically. Hot leads alert your phone. Works 24/7.</p>
+        <h4>Find the leaks</h4>
+        <div class="detail-kicker">Plain-English assessment</div>
+        <p>We look at calls, inboxes, quotes, reviews, forms, and handoffs. The goal is to find the small places good work is quietly getting lost.</p>
       </div>
       <div class="detail-card">
-        <h4>Email Agent</h4>
-        <div class="price-tag">Starting at $39/mo</div>
-        <p>Inbox sorted. Leads responded to in your voice. Quotes tracked . If someone ghosts, the system nudges them. Morning text with overnight activity.</p>
+        <h4>Build the queue</h4>
+        <div class="detail-kicker">Python-first when possible</div>
+        <p>Many tools can start as a simple script and spreadsheet: who needs a reply, who needs a nudge, and what the owner should look at today.</p>
       </div>
       <div class="detail-card">
-        <h4>Review Machine</h4>
-        <div class="price-tag">Starting at $29/mo</div>
-        <p>After every job/, customer gets a review request text. Bad feedback routed to you privately. Reviews grow without you thinking about it.</p>
+        <h4>Follow up warm work</h4>
+        <div class="detail-kicker">No lead left vague</div>
+        <p>Quotes, calls, and form leads get a next step. The system does not replace the owner. It keeps the owner from having to remember everything.</p>
       </div>
       <div class="detail-card">
-        <h4>Website</h4>
-        <div class="price-tag">Starting at $249</div>
-        <p>Professional site in 24 hours. Click-to-call, reviews, maps, contact form. Your domain. You own it. Not a $3K agency job.</p>
+        <h4>Ask for reviews</h4>
+        <div class="detail-kicker">Make happy customers easier to capture</div>
+        <p>Completed jobs become review requests, private feedback paths, and simple notes about what happened. No complicated dashboard required.</p>
       </div>
       <div class="detail-card">
-        <h4>Appointment Reminders</h4>
-        <div class="price-tag">Included</div>
-        <p>Automatic texts before every appointment. Customers confirm or reschedule with one tap. No more wasted drives to empty houses.</p>
+        <h4>Hand you the keys</h4>
+        <div class="detail-kicker">Built to be owned</div>
+        <p>The system is documented in normal language. You know what runs automatically, what needs review, and what each outside tool costs.</p>
       </div>
       <div class="detail-card">
-        <h4>Training</h4>
-        <div class="price-tag">Starting at $199</div>
-        <p>Want to run it yourself? 90-minute hands-on session. We set things up together in your actual business. You leave with working tools.</p>
+        <h4>Stack the next system</h4>
+        <div class="detail-kicker">Grow only after it works</div>
+        <p>Start with the easiest win. Once the owner trusts the process, we add the next piece instead of selling a pile of software at once.</p>
       </div>
     </div>
   </section>
@@ -211,40 +209,29 @@
   <section class="about">
     <div class="about-inner">
       <h2>About Us</h2>
-      <p>24 years building systems for some of the largest companies in the world. The kind that move millions a day and can't afford things to break. That's where we learned to find waste in a process, strip it out, and rebuild it so the same team produces more without working harder.</p>
-      <p>Then we noticed something. These massive companies were spending millions figuring out AI. Down the street, a plumber with 20 years of experience was losing jobs because he couldn't answer the phone from under a sink. Same problem. Completely different budget.</p>
-      <p>The tools exist. But they're built for people with tech teams. Sign up here, configure this, connect that. Not realistic for someone booked solid all day.</p>
+      <p>We learned systems work by watching what breaks when busy teams have too much moving at once. The pattern is always the same: good people, real demand, and work slipping through the spaces between tools.</p>
+      <p>Large companies hire teams to solve that. Local businesses usually get told to buy software, configure it themselves, and somehow keep the business running while they learn it.</p>
+      <p>That is backwards. The tools should fit the business. The owner should not have to become the tech department.</p>
       <p class="standout">So we started building for <span>the local guy</span> instead.</p>
       <ul class="value-list">
-        <li>We look at your business and find where time and money are leaking. Then we build a simple, custom system that plugs those gaps.</li>
-        <li>Nothing complex. Nothing you need to learn. Built around how you already work, not the other way around.</li>
-        <li>You own it. You understand it. And when you're ready for the next level, we build that too.</li>
-        <li>Same systems we built for billion-dollar operations, sized down to work for a one-person shop.</li>
+        <li>We look at your business and find where time, leads, and follow-up are leaking. Then we build a simple system around that reality.</li>
+        <li>Nothing is recommended until the cost, setup path, and waiting period are clear.</li>
+        <li>We prefer simple tools first: scripts, spreadsheets, queues, and clean workflows before fragile automation.</li>
+        <li>You own it, understand it, and can decide what gets automated next.</li>
       </ul>
-      <p>We live here in Northern Virginia. This is our neighborhood. We'd rather help 50 local businesses run better than build one more dashboard nobody uses.</p>
+      <p>We live here in Northern Virginia. This is our neighborhood. The goal is not another dashboard. The goal is a business that stops dropping good opportunities because the owner is already stretched thin.</p>
       <div class="cta-block">
-        <p>Free Assessment Call</p>
-        <p class="free">15 minutes on Zoom. We look at your setup, tell you where time and money are leaking, and whether we can help. No cost, no commitment. If it makes sense, we'll talk next steps. If not, you still walk away knowing more than you did.</p>
-        <a href="mailto:steve@crewmultiply.com?subject=Free Assessment Call">Book a free call</a>
+        <p>Workflow Look</p>
+        <p class="free">Send the messy version: the inbox, the quote sheet, the call process, the review routine, or whatever is currently living in your head. We will look for the first system worth building.</p>
+        <a href="mailto:steve@crewmultiply.com?subject=Workflow Look">Start the conversation</a>
       </div>
     </div>
   </section>
 
   <section class="position">
-    <p>Not an agency. Not software you log into. We build your AI team, hand you the keys. Run it yourself or keep us on to manage it. Either way, you own everything and it keeps running.</p>
+    <p>Not an agency. Not software you are left to figure out. We build the operating layer around your business, hand you the keys, and keep the path plain.</p>
     <span class="own">You own everything we build. Always.</span>
   </section>
-
-  <script>
-    function calculate() {
-      var calls = parseInt(document.getElementById('calls').value) || 0;
-      var jobVal = parseInt(document.getElementById('jobval').value);
-      var monthlyLost = Math.round(calls * 4.3 * 0.85 * 0.78 * jobVal);
-      document.getElementById('lostAmount').textContent = '$' + monthlyLost.toLocaleString();
-      document.getElementById('lostContext').textContent = 'Based on ' + calls + ' missed calls/week. 85% never call back. 78% choose whoever answers first.';
-    }
-    calculate();
-  </script>
 
 </body>
 </html>
