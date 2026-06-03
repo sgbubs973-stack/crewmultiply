@@ -3,235 +3,827 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CREW× | Do More With The Same Crew</title>
-  <meta name="description" content="CREW× builds practical systems for local businesses that catch missed calls, follow up quotes, request reviews, and keep work from slipping through the cracks.">
-  <meta property="og:title" content="CREW× | Do More With The Same Crew">
-  <meta property="og:description" content="Simple systems for local businesses that are too busy to chase every lead by hand.">
+  <title>CREW× | Stop Losing The Work You Already Earned</title>
+  <meta name="description" content="CREW× makes simple tools for local businesses: missed-call lists, quote follow-up trackers, reminder lists, review request systems, and website checks built around the way the business already works.">
+  <meta property="og:title" content="CREW× | Tech Handyman for Local Businesses">
+  <meta property="og:description" content="Simple small business tools made around your real calls, quotes, reminders, reviews, and follow-up.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://crewmultiply.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'DM Sans', sans-serif; background: #f4f6fa; color: #1a1a1a; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "DM Sans", Arial, sans-serif;
+      background: #f6f7f2;
+      color: #172033;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
 
-    .page { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; padding: 1.5rem 2.5rem; max-width: 960px; margin: 0 auto; }
-    @media (max-width: 600px) { .page { padding: 1.2rem 1.2rem; } }
+    .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
 
-    /* HEADER */
-    .header { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1.2rem; background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border-radius: 10px; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
-    .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: -0.02em; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(246, 247, 242, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+    }
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .logo { font-size: 1.38rem; font-weight: 900; letter-spacing: 0; }
     .logo .x { color: #2563eb; }
-    .logo-tag { font-size: 0.6rem; color: #64748b; font-weight: 500; margin-left: 0.6rem; letter-spacing: 0.02em; }
-    .header-cta { font-size: 0.78rem; color: #fff; background: linear-gradient(135deg, #2563eb, #1d4ed8); padding: 0.5rem 1.3rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.25s; box-shadow: 0 2px 8px rgba(37,99,235,0.25); }
-    .header-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,0.4); }
+    .brand-note { color: #667085; font-size: 0.74rem; font-weight: 700; }
+    .nav-links { display: flex; align-items: center; gap: 16px; font-size: 0.84rem; font-weight: 800; color: #344054; }
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: #2563eb; }
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 8px;
+      background: #172033;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(23, 32, 51, 0.18);
+    }
 
-    /* MAIN */
-    .main { display: flex; align-items: center; gap: 3.5rem; }
-    @media (max-width: 768px) { .main { flex-direction: column; gap: 2rem; text-align: center; align-items: stretch; } }
-    
-    .left { flex: 1.2; }
-    @media (max-width: 768px) { .left { flex: none; } }
-    .left h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 1rem; }
-    .left h1 .highlight { color: #2563eb; }
-    .left .sub { font-size: 0.88rem; color: #4a5568; line-height: 1.7; margin-bottom: 1.5rem; }
-    .left .sub strong { color: #1a1a1a; }
-    
-    /* Product chips */
-    .products-inline { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem; }
-    @media (max-width: 768px) { .products-inline { justify-content: center; } }
-    .products-inline .chip { font-size: 0.73rem; font-weight: 600; padding: 0.4rem 0.85rem; background: rgba(255,255,255,0.8); border: 1px solid rgba(37,99,235,0.1); border-radius: 6px; color: #334155; transition: all 0.25s; cursor: default; backdrop-filter: blur(4px); }
-    .products-inline .chip:hover { border-color: #2563eb; color: #2563eb; background: rgba(37,99,235,0.06); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,0.12); }
-    
-    .cta-row { display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
-    @media (max-width: 768px) { .cta-row { justify-content: center; } }
-    .cta-btn { padding: 0.75rem 1.8rem; background: linear-gradient(135deg, #1e293b, #334155); color: #fff; border-radius: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 700; transition: all 0.25s; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-    .cta-btn:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.35); }
-    .cta-or { font-size: 0.75rem; color: #94a3b8; }
-    .cta-email { font-size: 0.8rem; color: #2563eb; text-decoration: none; font-weight: 600; transition: color 0.2s; }
-    .cta-email:hover { color: #1d4ed8; }
+    .hero-band {
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(234, 179, 8, 0.08) 38%, rgba(22, 163, 74, 0.08)),
+        #f6f7f2;
+      border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+    }
+    .hero {
+      min-height: 640px;
+      padding: 58px 0 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+      gap: 44px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      color: #1d4ed8;
+      font-size: 0.76rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 4.1rem;
+      line-height: 1.02;
+      letter-spacing: 0;
+      font-weight: 900;
+      max-width: 720px;
+    }
+    .hero-copy {
+      margin-top: 18px;
+      max-width: 620px;
+      color: #3f4b5f;
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+    .hero-copy strong { color: #172033; }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .primary-cta,
+    .secondary-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .primary-cta { background: #2563eb; color: #fff; box-shadow: 0 14px 28px rgba(37, 99, 235, 0.26); }
+    .secondary-cta { background: #fff; color: #172033; border: 1px solid rgba(23, 32, 51, 0.12); }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+      max-width: 640px;
+    }
+    .hero-tags span {
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(23, 32, 51, 0.08);
+      color: #344054;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
 
-    /* RIGHT . Story */
-    .right { flex: 1; }
-    @media (max-width: 768px) { .right { flex: none; } }
-    .story-panel { background: linear-gradient(160deg, #ffffff 0%, #eef2ff 50%, #e8edff 100%); border: 1px solid rgba(37,99,235,0.12); border-radius: 16px; padding: 2rem; box-shadow: 0 12px 40px rgba(37,99,235,0.08), 0 1px 3px rgba(0,0,0,0.04); position: relative; overflow: hidden; }
-    .story-panel::before { content: ''; position: absolute; top: -30%; right: -30%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 65%); pointer-events: none; }
-    .story-panel::after { content: ''; position: absolute; bottom: -20%; left: -20%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(99,102,241,0.04) 0%, transparent 65%); pointer-events: none; }
-    .story-panel h3 { font-size: 0.88rem; font-weight: 800; margin-bottom: 1.2rem; position: relative; }
-    .story-card p { font-size: 0.82rem; color: #4a5568; line-height: 1.75; margin-bottom: 1rem; position: relative; }
-    .story-card .story-step { padding: 0.85rem 0; border-top: 1px solid rgba(37,99,235,0.08); position: relative; }
-    .story-card .story-step strong { display: block; font-size: 0.78rem; color: #1a1a1a; margin-bottom: 0.25rem; }
-    .story-card .story-step span { display: block; font-size: 0.74rem; color: #64748b; line-height: 1.6; }
+    .tool-preview {
+      background: #172033;
+      color: #fff;
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 24px 60px rgba(23, 32, 51, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .preview-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .preview-top strong { font-size: 0.95rem; }
+    .preview-top span {
+      color: #a9b5c8;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-align: right;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .comparison-card {
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+      color: #172033;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .comparison-card.slip { background: #fff8f8; border-color: rgba(239, 68, 68, 0.18); }
+    .comparison-card.caught { background: #f7fbff; border-color: rgba(37, 99, 235, 0.22); }
+    .compare-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 12px;
+      border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .comparison-card.slip .compare-heading { color: #ef4444; }
+    .comparison-card.caught .compare-heading { color: #2563eb; }
+    .compare-icon {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      font-weight: 900;
+    }
+    .comparison-card.slip .compare-icon { background: #fee2e2; color: #ef4444; }
+    .comparison-card.caught .compare-icon { background: #dbeafe; color: #2563eb; }
+    .compare-list { list-style: none; }
+    .compare-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px;
+      padding: 12px;
+      border-bottom: 1px solid rgba(23, 32, 51, 0.07);
+    }
+    .compare-item:last-child { border-bottom: 0; }
+    .compare-mark { color: #ef4444; font-size: 0.95rem; font-weight: 900; line-height: 1.2; }
+    .caught .compare-mark { color: #22c55e; }
+    .compare-title { display: block; font-size: 0.82rem; font-weight: 900; line-height: 1.25; }
+    .comparison-card.slip .compare-title { color: #8a92a3; text-decoration: line-through; }
+    .compare-note { display: block; margin-top: 3px; color: #667085; font-size: 0.72rem; line-height: 1.35; }
+    .comparison-card.slip .compare-note { color: #a7afbd; }
+    .compare-result {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px;
+      border-top: 1px solid rgba(23, 32, 51, 0.08);
+      font-size: 0.86rem;
+      font-weight: 900;
+    }
+    .comparison-card.slip .compare-result { color: #ef4444; background: rgba(254, 226, 226, 0.48); }
+    .comparison-card.caught .compare-result { color: #16a34a; background: rgba(220, 252, 231, 0.58); }
+    .compare-arrow {
+      align-self: center;
+      color: #60a5fa;
+      font-size: 1.7rem;
+      font-weight: 900;
+    }
+    .preview-footer {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f6f7f2;
+      color: #172033;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      font-weight: 700;
+    }
 
-    /* FOOTER */
-    .footer { padding-top: 2rem; display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 1rem; }
-    .footer-left { font-size: 0.7rem; color: #94a3b8; }
-    .footer-left .x { color: #2563eb; }
-    .footer-right { font-size: 0.65rem; color: #94a3b8; text-align: right; line-height: 1.6; }
-    .footer-right a { color: #64748b; text-decoration: none; transition: color 0.2s; }
-    .footer-right a:hover { color: #2563eb; }
+    .intro-strip {
+      transform: translateY(1px);
+      background: #fff;
+      border-top: 1px solid rgba(23, 32, 51, 0.08);
+      border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(23, 32, 51, 0.08);
+    }
+    .intro-tile {
+      min-height: 132px;
+      padding: 22px;
+      background: #fff;
+    }
+    .intro-tile strong { display: block; font-size: 0.92rem; margin-bottom: 8px; }
+    .intro-tile p { color: #667085; font-size: 0.82rem; line-height: 1.6; }
 
-    /* BELOW FOLD */
-    .below { max-width: 960px; margin: 0 auto; padding: 4rem 2.5rem; }
-    .below h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem; }
-    .below > p { font-size: 0.82rem; color: #64748b; margin-bottom: 1.5rem; }
-    .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-    .detail-card { padding: 1.4rem; border: 1px solid rgba(37,99,235,0.06); border-radius: 12px; transition: all 0.25s; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); }
-    .detail-card:hover { border-color: rgba(37,99,235,0.2); box-shadow: 0 8px 24px rgba(37,99,235,0.08); transform: translateY(-3px); background: #fff; }
-    .detail-card h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; }
-    .detail-card .detail-kicker { font-size: 0.7rem; color: #2563eb; font-weight: 700; margin-bottom: 0.5rem; }
-    .detail-card p { font-size: 0.75rem; color: #4a5568; line-height: 1.6; }
-    
-    .position { max-width: 960px; margin: 0 auto; padding: 2rem 2.5rem 3.5rem; text-align: center; }
-    .position p { font-size: 0.88rem; color: #4a5568; max-width: 520px; margin: 0 auto; line-height: 1.7; }
-    .position .own { display: inline-block; margin-top: 1rem; font-size: 0.72rem; color: #2563eb; font-weight: 700; border: 1.5px solid #2563eb; padding: 0.4rem 1rem; border-radius: 5px; transition: all 0.2s; }
-    .position .own:hover { background: #2563eb; color: #fff; }
-  
-    
-    /* STANDOUT LINE */
-    .about .standout { font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 900; color: #1a1a1a; margin: 1.5rem 0; padding: 0.8rem 0; text-shadow: 0 0 40px rgba(37,99,235,0.15), 0 0 80px rgba(37,99,235,0.05); }
-    .about .standout span { color: #2563eb; }
-    .about .value-list { list-style: none; margin: 1.2rem 0 1.5rem; padding: 0; }
-    .about .value-list li { font-size: 0.82rem; color: #4a5568; padding: 0.5rem 0; padding-left: 1.5rem; position: relative; line-height: 1.6; }
-    .about .value-list li::before { content: ''; position: absolute; left: 0; top: 0.85rem; width: 8px; height: 8px; background: #2563eb; border-radius: 2px; }
-    .about .cta-block { margin-top: 1.5rem; padding: 1.2rem; background: linear-gradient(135deg, rgba(37,99,235,0.04), rgba(37,99,235,0.02)); border: 1px solid rgba(37,99,235,0.1); border-radius: 10px; }
-    .about .cta-block p { font-size: 0.85rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem; }
-    .about .cta-block .free { font-size: 0.72rem; color: #64748b; margin-bottom: 0.8rem; }
-    .about .cta-block a { display: inline-block; padding: 0.6rem 1.4rem; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: #fff; border-radius: 6px; text-decoration: none; font-size: 0.82rem; font-weight: 700; transition: all 0.25s; box-shadow: 0 2px 8px rgba(37,99,235,0.25); }
-    .about .cta-block a:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(37,99,235,0.4); }
+    .section {
+      padding: 72px 0;
+    }
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+    .section-kicker {
+      color: #2563eb;
+      font-size: 0.78rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    h2 {
+      font-size: 2.35rem;
+      line-height: 1.12;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+    .section-head p {
+      margin-top: 12px;
+      color: #4b5565;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
 
-    /* ABOUT */
-    .about { max-width: 960px; margin: 0 auto; padding: 3.5rem 2.5rem; border-top: 1px solid #eee; }
-    .about-inner { max-width: 600px; }
-    .about h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; }
-    .about p { font-size: 0.82rem; color: #4a5568; line-height: 1.8; margin-bottom: 0.8rem; }
-    .about p strong { color: #1a1a1a; }
-    .creds { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
-    .cred-item { font-size: 0.68rem; font-weight: 600; padding: 0.35rem 0.75rem; background: rgba(37,99,235,0.05); border: 1px solid rgba(37,99,235,0.12); border-radius: 5px; color: #334155; }
+    .menu-wrap {
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .menu-note {
+      position: sticky;
+      top: 96px;
+      padding: 24px;
+      border-radius: 8px;
+      background: #172033;
+      color: #fff;
+    }
+    .menu-note h3 { font-size: 1.12rem; margin-bottom: 10px; }
+    .menu-note p { color: #d2dae8; font-size: 0.9rem; line-height: 1.7; }
+    .menu-note .plain {
+      display: block;
+      margin-top: 18px;
+      color: #a9b5c8;
+      font-size: 0.74rem;
+      line-height: 1.55;
+      font-weight: 800;
+    }
+    .menu-stack { display: grid; gap: 12px; }
+    details.menu-group {
+      background: #fff;
+      border: 1px solid rgba(23, 32, 51, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    details.menu-group[open] { box-shadow: 0 18px 42px rgba(23, 32, 51, 0.08); }
+    summary.menu-summary {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      padding: 18px 20px;
+      list-style: none;
+    }
+    summary.menu-summary::-webkit-details-marker { display: none; }
+    .summary-title { display: block; font-size: 1.02rem; font-weight: 900; color: #172033; }
+    .summary-copy { display: block; margin-top: 3px; color: #667085; font-size: 0.78rem; font-weight: 700; }
+    .summary-plus {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border-radius: 8px;
+      background: #edf3ff;
+      color: #2563eb;
+      font-weight: 900;
+    }
+    details[open] .summary-plus { background: #2563eb; color: #fff; }
+    .offer-list {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid rgba(23, 32, 51, 0.08);
+    }
+    details.offer {
+      background: #fff;
+      border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+    }
+    details.offer:last-child { border-bottom: 0; }
+    summary.offer-summary {
+      min-height: 68px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      cursor: pointer;
+      list-style: none;
+      padding: 16px 20px;
+    }
+    summary.offer-summary::-webkit-details-marker { display: none; }
+    .offer-name { font-size: 0.92rem; font-weight: 900; color: #172033; }
+    .offer-line { display: block; margin-top: 3px; font-size: 0.78rem; color: #667085; line-height: 1.45; }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 26px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: #e9f7ef;
+      color: #15803d;
+      font-size: 0.68rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .status-pill.plan { background: #fff7d6; color: #a16207; }
+    .offer-body {
+      padding: 0 20px 18px;
+      color: #4b5565;
+      font-size: 0.84rem;
+      line-height: 1.7;
+    }
+    .offer-body ul {
+      display: grid;
+      gap: 6px;
+      margin: 10px 0 0 18px;
+    }
 
+    .flow-band {
+      background: #fff;
+      border-top: 1px solid rgba(23, 32, 51, 0.08);
+      border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+    }
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .flow-step {
+      min-height: 170px;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid rgba(23, 32, 51, 0.1);
+      background: #f9faf6;
+    }
+    .flow-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    .flow-step h3 { font-size: 0.96rem; margin-bottom: 8px; }
+    .flow-step p { color: #667085; font-size: 0.82rem; line-height: 1.6; }
+
+    .close-band { padding: 70px 0 82px; }
+    .close-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 26px;
+      align-items: center;
+      padding: 28px;
+      border-radius: 8px;
+      background: #172033;
+      color: #fff;
+    }
+    .close-panel h2 { font-size: 2rem; }
+    .close-panel p { color: #d2dae8; margin-top: 10px; max-width: 720px; line-height: 1.7; }
+    .close-panel a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 8px;
+      background: #fff;
+      color: #172033;
+      text-decoration: none;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .site-footer {
+      padding: 26px 0;
+      border-top: 1px solid rgba(23, 32, 51, 0.08);
+      color: #667085;
+      font-size: 0.78rem;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+        padding: 44px 0 30px;
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 3rem; }
+      .menu-wrap { grid-template-columns: 1fr; }
+      .menu-note { position: static; }
+      .flow-grid { grid-template-columns: repeat(2, 1fr); }
+      .close-panel { grid-template-columns: 1fr; }
+      .intro-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 24px, 1120px); }
+      .nav { min-height: 66px; }
+      .brand-note, .nav-links a:not(.nav-button) { display: none; }
+      .nav-links { gap: 8px; }
+      .nav-button { min-height: 38px; padding: 0 12px; }
+      h1 { font-size: 2.35rem; }
+      .hero-copy { font-size: 0.98rem; }
+      .tool-preview { padding: 14px; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .compare-arrow { transform: rotate(90deg); justify-self: center; }
+      h2 { font-size: 1.78rem; }
+      .section { padding: 52px 0; }
+      .flow-grid { grid-template-columns: 1fr; }
+      summary.offer-summary { grid-template-columns: 1fr; }
+      .status-pill { width: max-content; }
+      .close-panel { padding: 22px; }
+      .close-panel h2 { font-size: 1.55rem; }
+    }
   </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="shell nav">
+      <a class="brand" href="#">
+        <span class="logo">CREW<span class="x">&times;</span></span>
+        <span class="brand-note">Custom tools for local businesses</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#menu">Your Solutions</a>
+        <a href="#how">How it works</a>
+        <a class="nav-button" href="mailto:steve@crewmultiply.com?subject=Workflow Look">Talk to Steve</a>
+      </nav>
+    </div>
+  </header>
 
-  <div class="page">
-    <header class="header">
-      <div><span class="logo">CREW<span class="x">&times;</span></span><span class="logo-tag">Your crew, multiplied.</span></div>
-      <a href="mailto:steve@crewmultiply.com?subject=Let's talk" class="header-cta">Let's talk</a>
-    </header>
-
-    <div class="main">
-      <div class="left">
-        <h1>The work is there. <span class="highlight">The follow-up is where it slips.</span></h1>
-        <p class="sub">A customer calls while you are on a job. A quote waits in the inbox. A happy customer forgets to leave a review. CREW<span class="x">&times;</span> builds the quiet systems that catch those moments before they disappear.</p>
-        
-        <div class="products-inline">
-          <span class="chip">Missed-call recovery</span>
-          <span class="chip">Quote follow-up</span>
-          <span class="chip">Review requests</span>
-          <span class="chip">Simple CRM</span>
-          <span class="chip">Owner dashboard</span>
-        </div>
-
-        <div class="cta-row">
-          <a href="mailto:steve@crewmultiply.com?subject=Let's talk" class="cta-btn">Show me the gaps</a>
-          <span class="cta-or">or</span>
-          <a href="mailto:steve@crewmultiply.com" class="cta-email">steve@crewmultiply.com</a>
-        </div>
-      </div>
-
-      <div class="right">
-        <div class="story-panel story-card">
-          <h3>A normal day, cleaned up.</h3>
-          <p>The job is not lost because the owner does not care. It is lost because the owner is already doing the work.</p>
-          <div class="story-step">
-            <strong>The call gets caught.</strong>
-            <span>Missed calls and form leads land in one place instead of fading into memory.</span>
+  <main>
+    <section class="hero-band">
+      <div class="shell hero">
+        <div>
+          <div class="eyebrow">For contractors, trades, and local service businesses</div>
+          <h1>Stop losing the work you already earned.</h1>
+          <p class="hero-copy">A customer calls while you are on a job. A quote goes out and never gets a follow-up. A finished job never turns into a review. <strong>CREW× makes simple tools for your business so those moments get handled before they disappear.</strong> Sometimes that starts as a spreadsheet. Sometimes it becomes a simple app. The point is a tool that fits the way you already work.</p>
+          <div class="hero-actions">
+            <a class="primary-cta" href="#menu">See common fixes</a>
+            <a class="secondary-cta" href="mailto:steve@crewmultiply.com?subject=Workflow Look">Talk about my workflow</a>
           </div>
-          <div class="story-step">
-            <strong>The next step gets written.</strong>
-            <span>Replies, follow-ups, reminders, and review requests are ready before the day gets away.</span>
-          </div>
-          <div class="story-step">
-            <strong>The owner gets the keys.</strong>
-            <span>You see what is running, what it costs, and what still needs a human touch.</span>
+          <div class="hero-tags" aria-label="Common small business fixes">
+            <span>Missed calls</span>
+            <span>Quote follow-up</span>
+            <span>Review requests</span>
+            <span>Appointment reminders</span>
+            <span>Website checks</span>
           </div>
         </div>
+
+        <div class="tool-preview" aria-label="Example side by side follow-up preview">
+          <div class="preview-top">
+            <strong>What slips vs. what gets caught</strong>
+            <span>The same busy week with a simple follow-up tool running.</span>
+          </div>
+          <div class="comparison-grid">
+            <div class="comparison-card slip">
+              <div class="compare-heading"><span class="compare-icon">!</span><span>Without follow-up</span></div>
+              <ul class="compare-list">
+                <li class="compare-item">
+                  <span class="compare-mark">x</span>
+                  <span><span class="compare-title">Missed call never returned</span><span class="compare-note">The owner was busy and the lead went quiet.</span></span>
+                </li>
+                <li class="compare-item">
+                  <span class="compare-mark">x</span>
+                  <span><span class="compare-title">Quote went cold</span><span class="compare-note">Estimate sent, but nobody checked back in.</span></span>
+                </li>
+                <li class="compare-item">
+                  <span class="compare-mark">x</span>
+                  <span><span class="compare-title">Review never asked</span><span class="compare-note">The job ended well, but the ask slipped away.</span></span>
+                </li>
+              </ul>
+              <div class="compare-result"><span>↘</span><span>Work slips away</span></div>
+            </div>
+            <div class="compare-arrow" aria-hidden="true">→</div>
+            <div class="comparison-card caught">
+              <div class="compare-heading"><span class="compare-icon">✓</span><span>With CREW×</span></div>
+              <ul class="compare-list">
+                <li class="compare-item">
+                  <span class="compare-mark">✓</span>
+                  <span><span class="compare-title">Call-back reminder ready</span><span class="compare-note">The next call is clear before the day gets away.</span></span>
+                </li>
+                <li class="compare-item">
+                  <span class="compare-mark">✓</span>
+                  <span><span class="compare-title">Quote nudge written</span><span class="compare-note">A polite check-in is ready when the quote goes quiet.</span></span>
+                </li>
+                <li class="compare-item">
+                  <span class="compare-mark">✓</span>
+                  <span><span class="compare-title">Review ask ready</span><span class="compare-note">The thank-you gets sent while the work is still fresh.</span></span>
+                </li>
+              </ul>
+              <div class="compare-result"><span>↗</span><span>Work gets handled</span></div>
+            </div>
+          </div>
+          <div class="preview-footer">Made for your calls, quotes, reminders, and follow-up. Use it by hand first, then automate what earns its place.</div>
+        </div>
       </div>
+    </section>
+
+    <section class="intro-strip" aria-label="Positioning summary">
+      <div class="shell intro-grid">
+        <div class="intro-tile">
+          <strong>Start with your real mess.</strong>
+          <p>Calls, quotes, reminders, reviews, missing notes, or the list you already tried to make work.</p>
+        </div>
+        <div class="intro-tile">
+          <strong>You do not need to pick the software.</strong>
+          <p>Bring the headache. The first fix is built around your work before we worry about apps, platforms, or automation.</p>
+        </div>
+        <div class="intro-tile">
+          <strong>Useful before automatic.</strong>
+          <p>Some tools may use AI behind the scenes. You do not need to understand it. You just need the follow-up to happen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-kicker">Common fixes</div>
+          <h2>Fix the parts of the week that keep slipping.</h2>
+          <p>Open a section and pick the problem that sounds familiar. The first version is made around your real calls, quotes, customers, notes, and tools.</p>
+        </div>
+
+        <div class="menu-wrap">
+          <aside class="menu-note">
+            <h3>You bring the headache</h3>
+            <p>You do not need to know which app to buy or how automation should work. Bring the messy version: calls, quotes, reminders, reviews, invoices, or a website draft. The first fix is something you can understand, use, and own.</p>
+          </aside>
+
+          <div class="menu-stack">
+            <details class="menu-group" open>
+              <summary class="menu-summary">
+                <span><span class="summary-title">Catch the work</span><span class="summary-copy">Calls, leads, quotes, and the daily follow-up that gets missed.</span></span>
+                <span class="summary-plus">+</span>
+              </summary>
+              <div class="offer-list">
+                <details class="offer" open>
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">First Look</span><span class="offer-line">Find the first tool your business actually needs.</span></span>
+                    <span class="status-pill">Start here</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>A quick look at the real process: inbox, call log, quote sheet, website form, notebook, or whatever you use now. You leave with the first tool to make and the questions that need answers before anything gets automated.</p>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Daily Owner List</span><span class="offer-line">One list made for what you need to answer, check, or finish.</span></span>
+                    <span class="status-pill">Custom build</span>
+                  </summary>
+                  <div class="offer-body">
+                    <ul>
+                      <li>People waiting on your reply.</li>
+                      <li>Follow-ups due today.</li>
+                      <li>Names, phone numbers, emails, or next steps that are missing.</li>
+                    </ul>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Missed-Call List</span><span class="offer-line">A call-back list made from the calls your business missed.</span></span>
+                    <span class="status-pill">Custom build</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>Shows who called, when to call back, what to say, and which calls are getting old. We can start with a simple list before connecting any phone or texting tool.</p>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Quote Follow-Up List</span><span class="offer-line">A follow-up list built from the quotes you already send.</span></span>
+                    <span class="status-pill plan">Custom build</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>This can include your sent quotes, follow-ups due, simple message drafts, and outcomes like booked, lost, no reply, or owner call needed.</p>
+                  </div>
+                </details>
+              </div>
+            </details>
+
+            <details class="menu-group">
+              <summary class="menu-summary">
+                <span><span class="summary-title">Keep customers moving</span><span class="summary-copy">Reminders, reviews, job wrap-up, and the follow-through customers remember.</span></span>
+                <span class="summary-plus">+</span>
+              </summary>
+              <div class="offer-list">
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Review Request List</span><span class="offer-line">A review ask made for your finished jobs.</span></span>
+                    <span class="status-pill">Custom build</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>Drafts a thank-you in your voice and tracks whether it was sent, answered, posted, or needs the owner to step in.</p>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Appointment Reminder List</span><span class="offer-line">A reminder list shaped around your schedule.</span></span>
+                    <span class="status-pill">Custom build</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>Shows your upcoming appointments, reminders due, customers waiting to confirm, and jobs that need to be rescheduled or closed.</p>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Job Closeout Checklist</span><span class="offer-line">A finish-the-job list made for your workflow.</span></span>
+                    <span class="status-pill plan">Future fit</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>This can include invoice sent, photos saved, customer thanked, review requested, and next reminder set.</p>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Referral Request List</span><span class="offer-line">A referral ask made for customers who already trust you.</span></span>
+                    <span class="status-pill plan">Future fit</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>This can include a simple referral ask, sent status, replies, and no-response tracking.</p>
+                  </div>
+                </details>
+              </div>
+            </details>
+
+            <details class="menu-group">
+              <summary class="menu-summary">
+                <span><span class="summary-title">Make the business easier to run</span><span class="summary-copy">Cleaner weeks, cleaner invoices, safer launches, and better job proof.</span></span>
+                <span class="summary-plus">+</span>
+              </summary>
+              <div class="offer-list">
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Site Draft QA</span><span class="offer-line">A launch check for the site you are actually building.</span></span>
+                    <span class="status-pill">Ready now</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>A practical review for risky claims, broken links, form issues, missing details, and launch blockers. Big promises stay off the page until there is proof.</p>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Weekly Owner Brief</span><span class="offer-line">One page made from what your week needs.</span></span>
+                    <span class="status-pill plan">Future fit</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>This can include leads, follow-ups, missed calls, review asks, reminders, unpaid invoices, and stuck items in one short summary.</p>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Invoice Nudge List</span><span class="offer-line">Follow-up drafts made for your unpaid invoices.</span></span>
+                    <span class="status-pill plan">Future fit</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>This can include unpaid invoice tracking, reminder drafts, paid/disputed/waiting statuses, and owner notes.</p>
+                  </div>
+                </details>
+                <details class="offer">
+                  <summary class="offer-summary">
+                    <span><span class="offer-name">Proof Pack</span><span class="offer-line">Turn your finished work into photos, notes, and customer stories.</span></span>
+                    <span class="status-pill plan">Future fit</span>
+                  </summary>
+                  <div class="offer-body">
+                    <p>This can include job notes, photos, and customer comments turned into a review ask, website blurb, social post, or short job story.</p>
+                  </div>
+                </details>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section flow-band">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-kicker">What happens next</div>
+          <h2>Four steps. No software until it earns its place.</h2>
+          <p>You bring the messy version. You get a simple working version made for your business. Then it gets improved only after it has been used on real work.</p>
+        </div>
+        <div class="flow-grid">
+          <div class="flow-step">
+            <span class="flow-num">1</span>
+            <h3>Show me the messy version</h3>
+            <p>The inbox, quote sheet, missed-call list, reminders, review routine, unpaid invoices, or the spreadsheet nobody trusts.</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-num">2</span>
+            <h3>We make the first version</h3>
+            <p>It shows who needs a call, what message is ready, what information is missing, and what can wait.</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-num">3</span>
+            <h3>You use it on real work</h3>
+            <p>Try it for a few days. We keep what saves time and remove anything that feels like another chore.</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-num">4</span>
+            <h3>Then we choose the right tool</h3>
+            <p>If software helps, the price, delay, setup rules, and failure points get checked before anyone buys it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="close-band">
+      <div class="shell">
+        <div class="close-panel">
+          <div>
+            <h2>Send me the messy version.</h2>
+            <p>Send the thing that is half-working right now: the inbox, quote sheet, call process, review routine, appointment list, or website draft. You will get one practical next question back. No call unless you want one.</p>
+          </div>
+          <a href="mailto:steve@crewmultiply.com?subject=Help me clean this up">Talk to Steve</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <span>CREW<span class="x">&times;</span> | Northern Virginia</span>
+      <span>You own the tools made for your business.</span>
     </div>
-
-    <div class="footer">
-      <div class="footer-left">CREW<span class="x">&times;</span> | Northern Virginia</div>
-      <div class="footer-right">Plumbers. HVAC. Electricians. Cleaners. Painters. Contractors.<br>You own everything. Tool costs explained before setup. <a href="mailto:steve@crewmultiply.com">Start a conversation.</a></div>
-    </div>
-  </div>
-
-  <!-- Below the fold -->
-  <section class="below">
-    <h2>How it works.</h2>
-    <p>We start with the workflow you already have, find the places work leaks out, then build the simplest system that catches it. You see costs, setup gates, and timing before anything is bought.</p>
-    <div class="detail-grid">
-      <div class="detail-card">
-        <h4>Find the leaks</h4>
-        <div class="detail-kicker">Plain-English assessment</div>
-        <p>We look at calls, inboxes, quotes, reviews, forms, and handoffs. The goal is to find the small places good work is quietly getting lost.</p>
-      </div>
-      <div class="detail-card">
-        <h4>Build the queue</h4>
-        <div class="detail-kicker">Python-first when possible</div>
-        <p>Many tools can start as a simple script and spreadsheet: who needs a reply, who needs a nudge, and what the owner should look at today.</p>
-      </div>
-      <div class="detail-card">
-        <h4>Follow up warm work</h4>
-        <div class="detail-kicker">No lead left vague</div>
-        <p>Quotes, calls, and form leads get a next step. The system does not replace the owner. It keeps the owner from having to remember everything.</p>
-      </div>
-      <div class="detail-card">
-        <h4>Ask for reviews</h4>
-        <div class="detail-kicker">Make happy customers easier to capture</div>
-        <p>Completed jobs become review requests, private feedback paths, and simple notes about what happened. No complicated dashboard required.</p>
-      </div>
-      <div class="detail-card">
-        <h4>Hand you the keys</h4>
-        <div class="detail-kicker">Built to be owned</div>
-        <p>The system is documented in normal language. You know what runs automatically, what needs review, and what each outside tool costs.</p>
-      </div>
-      <div class="detail-card">
-        <h4>Stack the next system</h4>
-        <div class="detail-kicker">Grow only after it works</div>
-        <p>Start with the easiest win. Once the owner trusts the process, we add the next piece instead of selling a pile of software at once.</p>
-      </div>
-    </div>
-  </section>
-
-  
-  <!-- About -->
-  <section class="about">
-    <div class="about-inner">
-      <h2>About Us</h2>
-      <p>We learned systems work by watching what breaks when busy teams have too much moving at once. The pattern is always the same: good people, real demand, and work slipping through the spaces between tools.</p>
-      <p>Large companies hire teams to solve that. Local businesses usually get told to buy software, configure it themselves, and somehow keep the business running while they learn it.</p>
-      <p>That is backwards. The tools should fit the business. The owner should not have to become the tech department.</p>
-      <p class="standout">So we started building for <span>the local guy</span> instead.</p>
-      <ul class="value-list">
-        <li>We look at your business and find where time, leads, and follow-up are leaking. Then we build a simple system around that reality.</li>
-        <li>Nothing is recommended until the cost, setup path, and waiting period are clear.</li>
-        <li>We prefer simple tools first: scripts, spreadsheets, queues, and clean workflows before fragile automation.</li>
-        <li>You own it, understand it, and can decide what gets automated next.</li>
-      </ul>
-      <p>We live here in Northern Virginia. This is our neighborhood. The goal is not another dashboard. The goal is a business that stops dropping good opportunities because the owner is already stretched thin.</p>
-      <div class="cta-block">
-        <p>Workflow Look</p>
-        <p class="free">Send the messy version: the inbox, the quote sheet, the call process, the review routine, or whatever is currently living in your head. We will look for the first system worth building.</p>
-        <a href="mailto:steve@crewmultiply.com?subject=Workflow Look">Start the conversation</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="position">
-    <p>Not an agency. Not software you are left to figure out. We build the operating layer around your business, hand you the keys, and keep the path plain.</p>
-    <span class="own">You own everything we build. Always.</span>
-  </section>
-
+  </footer>
 </body>
 </html>
