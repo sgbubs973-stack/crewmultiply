@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CREW× | Stop Losing The Work You Already Earned</title>
   <meta name="description" content="CREW× makes simple tools for local businesses: missed-call lists, quote follow-up trackers, reminder lists, review request systems, and website checks built around the way the business already works.">
-  <meta property="og:title" content="CREW× | Tech Handyman for Local Businesses">
+  <meta property="og:title" content="CREW× | Simple Tools for Local Businesses">
   <meta property="og:description" content="Simple small business tools made around your real calls, quotes, reminders, reviews, and follow-up.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://crewmultiply.com">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23172033'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-size='24' font-weight='900' fill='%23fff'%3ECx%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -33,6 +34,27 @@
       background: rgba(246, 247, 242, 0.88);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+      transition: background 180ms ease, box-shadow 180ms ease;
+    }
+    .site-header.is-scrolled {
+      background: rgba(246, 247, 242, 0.96);
+      box-shadow: 0 12px 34px rgba(23, 32, 51, 0.08);
+    }
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 30;
+      background: rgba(23, 32, 51, 0.06);
+    }
+    .scroll-progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #0ea5e9, #22c55e, #facc15);
+      box-shadow: 0 0 18px rgba(37, 99, 235, 0.38);
     }
     .nav {
       min-height: 72px;
@@ -52,8 +74,28 @@
     .logo .x { color: #2563eb; }
     .brand-note { color: #667085; font-size: 0.74rem; font-weight: 700; }
     .nav-links { display: flex; align-items: center; gap: 16px; font-size: 0.84rem; font-weight: 800; color: #344054; }
-    .nav-links a { text-decoration: none; }
-    .nav-links a:hover { color: #2563eb; }
+    .nav-links a {
+      position: relative;
+      text-decoration: none;
+      transition: color 180ms ease;
+    }
+    .nav-links a:not(.nav-button)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 2px;
+      border-radius: 999px;
+      background: #2563eb;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 180ms ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.is-current { color: #2563eb; }
+    .nav-links a:hover::after,
+    .nav-links a.is-current::after { transform: scaleX(1); }
     .nav-button {
       display: inline-flex;
       align-items: center;
@@ -69,8 +111,11 @@
 
     .hero-band {
       background:
+        linear-gradient(rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px),
         linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(234, 179, 8, 0.08) 38%, rgba(22, 163, 74, 0.08)),
         #f6f7f2;
+      background-size: 34px 34px, 34px 34px, auto;
       border-bottom: 1px solid rgba(23, 32, 51, 0.08);
     }
     .hero {
@@ -116,20 +161,112 @@
       gap: 12px;
       margin-top: 26px;
     }
+    .proof-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      max-width: 620px;
+      margin-top: 24px;
+      border: 1px solid rgba(23, 32, 51, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(23, 32, 51, 0.08);
+      box-shadow: 0 18px 42px rgba(23, 32, 51, 0.08);
+    }
+    .proof-metric {
+      min-height: 86px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(12px);
+    }
+    .proof-metric strong {
+      display: block;
+      color: #172033;
+      font-size: 1.35rem;
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+    .proof-metric span {
+      display: block;
+      color: #667085;
+      font-size: 0.73rem;
+      line-height: 1.4;
+      font-weight: 800;
+    }
     .primary-cta,
     .secondary-cta {
+      position: relative;
+      overflow: hidden;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 10px;
       min-height: 48px;
-      padding: 0 20px;
+      padding: 0 22px;
       border-radius: 8px;
       font-size: 0.92rem;
       font-weight: 900;
       text-decoration: none;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      isolation: isolate;
     }
-    .primary-cta { background: #2563eb; color: #fff; box-shadow: 0 14px 28px rgba(37, 99, 235, 0.26); }
-    .secondary-cta { background: #fff; color: #172033; border: 1px solid rgba(23, 32, 51, 0.12); }
+    .primary-cta {
+      background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 62%, #22c55e 130%);
+      color: #fff;
+      box-shadow: 0 16px 34px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+    .primary-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 0 34%, rgba(255, 255, 255, 0.42) 48%, transparent 62%);
+      transform: translateX(-90%);
+      animation: cta-sweep 3.8s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .primary-cta::after,
+    .secondary-cta::after {
+      content: "→";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      line-height: 1;
+      transition: transform 180ms ease;
+      position: relative;
+      z-index: 1;
+    }
+    .primary-cta::after {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+    }
+    .secondary-cta {
+      background: rgba(255, 255, 255, 0.88);
+      color: #172033;
+      border: 1px solid rgba(23, 32, 51, 0.12);
+      box-shadow: 0 14px 30px rgba(23, 32, 51, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+    }
+    .secondary-cta::after {
+      background: #edf3ff;
+      color: #2563eb;
+    }
+    .primary-cta:hover,
+    .secondary-cta:hover {
+      transform: translateY(-2px);
+    }
+    .primary-cta:hover { box-shadow: 0 22px 44px rgba(37, 99, 235, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.32); }
+    .secondary-cta:hover { border-color: rgba(37, 99, 235, 0.3); box-shadow: 0 20px 40px rgba(23, 32, 51, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.94); }
+    .primary-cta:hover::after,
+    .secondary-cta:hover::after { transform: translateX(2px); }
+    @keyframes cta-sweep {
+      0%, 42% { transform: translateX(-90%); }
+      70%, 100% { transform: translateX(90%); }
+    }
     .hero-tags {
       display: flex;
       flex-wrap: wrap;
@@ -138,13 +275,98 @@
       max-width: 640px;
     }
     .hero-tags span {
-      padding: 8px 10px;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 8px 12px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(23, 32, 51, 0.08);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.72));
+      border: 1px solid rgba(23, 32, 51, 0.1);
       color: #344054;
       font-size: 0.78rem;
       font-weight: 800;
+      box-shadow: 0 10px 24px rgba(23, 32, 51, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .hero-tags span::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      border-radius: 999px;
+      background: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .hero-tags span:nth-child(2)::before { background: #facc15; box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.16); }
+    .hero-tags span:nth-child(3)::before { background: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.14); }
+    .hero-tags span:nth-child(4)::before { background: #0ea5e9; box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.14); }
+    .hero-tags span:nth-child(5)::before { background: #f97316; box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.13); }
+    .hero-tags span:hover {
+      transform: translateY(-2px);
+      border-color: rgba(37, 99, 235, 0.22);
+      box-shadow: 0 16px 34px rgba(23, 32, 51, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.96);
+    }
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 620px;
+      margin-top: 18px;
+    }
+    .proof-chip {
+      position: relative;
+      overflow: hidden;
+      min-height: 74px;
+      padding: 14px 14px 14px 16px;
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.76)),
+        #fff;
+      border: 1px solid rgba(23, 32, 51, 0.1);
+      box-shadow: 0 18px 42px rgba(23, 32, 51, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.96);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .proof-chip::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, #2563eb, #0ea5e9);
+    }
+    .proof-chip:nth-child(2)::before { background: linear-gradient(180deg, #22c55e, #0ea5e9); }
+    .proof-chip:nth-child(3)::before { background: linear-gradient(180deg, #facc15, #f97316); }
+    .proof-chip::after {
+      content: "";
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      width: 34px;
+      height: 20px;
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg, rgba(37, 99, 235, 0.18) 0 42%, transparent 42% 58%, rgba(34, 197, 94, 0.2) 58% 100%);
+      opacity: 0.72;
+    }
+    .proof-chip:hover {
+      transform: translateY(-3px);
+      border-color: rgba(37, 99, 235, 0.18);
+      box-shadow: 0 24px 52px rgba(23, 32, 51, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.98);
+    }
+    .proof-chip strong {
+      display: block;
+      color: #172033;
+      font-size: 0.84rem;
+      margin-bottom: 4px;
+    }
+    .proof-chip span {
+      display: block;
+      color: #667085;
+      font-size: 0.73rem;
+      line-height: 1.35;
+      font-weight: 700;
     }
 
     .tool-preview {
@@ -154,6 +376,25 @@
       padding: 18px;
       box-shadow: 0 24px 60px rgba(23, 32, 51, 0.28);
       border: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .tool-preview::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(110deg, transparent 0 42%, rgba(255, 255, 255, 0.12) 50%, transparent 58%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 34%);
+      transform: translateX(-70%);
+      animation: preview-scan 7s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+    @keyframes preview-scan {
+      0%, 28% { transform: translateX(-78%); }
+      52%, 100% { transform: translateX(78%); }
     }
     .preview-top {
       display: flex;
@@ -254,6 +495,483 @@
       font-weight: 700;
     }
 
+    .showcase-band {
+      background: #0f172a;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(23, 32, 51, 0.08);
+      border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+    }
+    .showcase-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, #000, transparent 88%);
+      pointer-events: none;
+    }
+    .showcase {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
+      gap: 34px;
+      align-items: center;
+    }
+    .showcase .section-kicker { color: #93c5fd; }
+    .showcase h2 { max-width: 620px; }
+    .showcase-copy p {
+      margin-top: 14px;
+      color: #cbd5e1;
+      line-height: 1.75;
+      font-size: 1rem;
+      max-width: 590px;
+    }
+    .showcase-tabs {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .showcase-tab {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      align-items: center;
+      column-gap: 12px;
+      padding: 13px 14px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+        rgba(15, 23, 42, 0.42);
+      color: #dbeafe;
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: background 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+      isolation: isolate;
+    }
+    .showcase-tab::before {
+      content: attr(data-step);
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(37, 99, 235, 0.16);
+      border: 1px solid rgba(147, 197, 253, 0.28);
+      color: #bfdbfe;
+      font-size: 0.72rem;
+      font-weight: 900;
+      box-shadow: inset 0 0 18px rgba(96, 165, 250, 0.16);
+      z-index: 1;
+    }
+    .showcase-tab::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background:
+        linear-gradient(110deg, transparent 0 30%, rgba(255, 255, 255, 0.42) 45%, transparent 58%),
+        radial-gradient(circle at 12% 20%, rgba(255, 255, 255, 0.28), transparent 24%);
+      opacity: 0;
+      transform: translateX(-75%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .showcase-tab:hover {
+      transform: translateY(-2px);
+      border-color: rgba(96, 165, 250, 0.7);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+    }
+    .showcase-tab.is-active {
+      background:
+        radial-gradient(circle at 15% 18%, rgba(255, 255, 255, 0.32), transparent 22%),
+        linear-gradient(135deg, #2563eb 0%, #0ea5e9 52%, #22c55e 130%);
+      border-color: #60a5fa;
+      color: #fff;
+      box-shadow: 0 20px 46px rgba(37, 99, 235, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+    }
+    .showcase-tab.is-active::before {
+      background: rgba(255, 255, 255, 0.94);
+      border-color: rgba(255, 255, 255, 0.7);
+      color: #172033;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.18);
+    }
+    .showcase-tab.is-active::after {
+      opacity: 1;
+      animation: tab-shine 2.8s ease-in-out infinite;
+    }
+    .showcase-tab.is-firing {
+      animation: tab-fire 420ms ease both;
+    }
+    .showcase-tab.is-firing::before {
+      animation: badge-pop 420ms ease both;
+    }
+    @keyframes tab-shine {
+      0%, 38% { transform: translateX(-78%); }
+      70%, 100% { transform: translateX(78%); }
+    }
+    @keyframes tab-fire {
+      0% { transform: translateY(-1px) scale(1); }
+      44% { transform: translateY(-3px) scale(1.018); }
+      100% { transform: translateY(-1px) scale(1); }
+    }
+    @keyframes badge-pop {
+      0% { transform: scale(1); }
+      42% { transform: scale(1.12) rotate(-2deg); }
+      100% { transform: scale(1); }
+    }
+    .showcase-tab strong,
+    .showcase-tab span {
+      grid-column: 2;
+      position: relative;
+      z-index: 1;
+    }
+    .showcase-tab strong { display: block; align-self: end; font-size: 0.9rem; }
+    .showcase-tab span { display: block; align-self: start; margin-top: 3px; color: inherit; opacity: 0.78; font-size: 0.75rem; font-weight: 800; line-height: 1.35; }
+    .live-build {
+      border-radius: 14px;
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      background: rgba(248, 250, 252, 0.06);
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+      overflow: hidden;
+    }
+    .browser-bar {
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 16px;
+      background: rgba(15, 23, 42, 0.86);
+      border-bottom: 1px solid rgba(147, 197, 253, 0.18);
+    }
+    .browser-dots { display: flex; gap: 6px; }
+    .browser-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+    .browser-dots span:nth-child(1) { background: #fb7185; }
+    .browser-dots span:nth-child(2) { background: #facc15; }
+    .browser-dots span:nth-child(3) { background: #4ade80; }
+    .browser-url {
+      flex: 1;
+      max-width: 420px;
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #bfdbfe;
+      font-size: 0.76rem;
+      font-weight: 800;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .build-screen {
+      background: #f8fafc;
+      color: #172033;
+      padding: 18px;
+    }
+    .build-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+    .build-hero h3 {
+      font-size: 1.3rem;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .build-hero p {
+      color: #667085;
+      font-size: 0.84rem;
+      line-height: 1.55;
+      max-width: 520px;
+    }
+    .build-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 0.74rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .routing-lab {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 16px;
+      padding: 14px;
+      border-radius: 12px;
+      background:
+        linear-gradient(rgba(147, 197, 253, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(147, 197, 253, 0.09) 1px, transparent 1px),
+        #0f172a;
+      background-size: 28px 28px, 28px 28px, auto;
+      color: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.28);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.2);
+    }
+    .routing-lab::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, transparent 0 35%, rgba(255, 255, 255, 0.16) 47%, transparent 60%);
+      transform: translateX(-100%);
+      pointer-events: none;
+    }
+    .live-build.is-routing .routing-lab::after {
+      animation: routing-scan 700ms ease both;
+    }
+    @keyframes routing-scan {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+    .routing-lab-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .routing-lab-head span {
+      color: #93c5fd;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .routing-lab-head strong {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #facc15;
+      color: #172033;
+      font-size: 0.74rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .routing-flow {
+      display: grid;
+      grid-template-columns: 1fr 68px 1fr 68px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+    .routing-node {
+      min-height: 80px;
+      padding: 12px;
+      border: 1px solid rgba(147, 197, 253, 0.24);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .routing-node.is-core {
+      border-color: rgba(74, 222, 128, 0.44);
+      background: rgba(22, 163, 74, 0.16);
+    }
+    .routing-node span {
+      display: block;
+      margin-bottom: 5px;
+      color: #cbd5e1;
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .routing-node strong {
+      display: block;
+      font-size: 0.86rem;
+      line-height: 1.25;
+    }
+    .routing-track {
+      position: relative;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(147, 197, 253, 0.18);
+    }
+    .routing-track span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 34px;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #60a5fa, #4ade80, #facc15);
+      animation: route-packet 1.45s ease-in-out infinite;
+    }
+    .routing-track:nth-of-type(4) span { animation-delay: 260ms; }
+    @keyframes route-packet {
+      0% { transform: translateX(-42px); opacity: 0; }
+      16%, 74% { opacity: 1; }
+      100% { transform: translateX(76px); opacity: 0; }
+    }
+    .routing-draft {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(248, 250, 252, 0.1);
+      border: 1px solid rgba(203, 213, 225, 0.16);
+    }
+    .routing-draft span {
+      display: block;
+      margin-bottom: 5px;
+      color: #93c5fd;
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .routing-draft p {
+      color: #f8fafc;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+    .build-grid {
+      display: grid;
+      grid-template-columns: 0.84fr 1.16fr;
+      gap: 14px;
+    }
+    .build-panel {
+      border: 1px solid #dbe3ef;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .panel-label {
+      padding: 12px 14px;
+      border-bottom: 1px solid #e5eaf3;
+      color: #2563eb;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .visitor-stack,
+    .owner-stack {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+    .field-card {
+      border: 1px solid #e5eaf3;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 11px;
+    }
+    .field-card span {
+      display: block;
+      color: #667085;
+      font-size: 0.7rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .field-card strong {
+      display: block;
+      font-size: 0.9rem;
+      line-height: 1.3;
+    }
+    .action-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      border: 1px solid #dbeafe;
+      border-radius: 8px;
+      background: #f7fbff;
+      padding: 12px;
+      animation: action-pop 380ms ease both;
+    }
+    .action-card:nth-child(2) { animation-delay: 70ms; }
+    .action-card:nth-child(3) { animation-delay: 140ms; }
+    @keyframes action-pop {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .action-num {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+    .action-card strong {
+      display: block;
+      font-size: 0.92rem;
+      line-height: 1.3;
+    }
+    .action-card span {
+      display: block;
+      margin-top: 3px;
+      color: #667085;
+      font-size: 0.76rem;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+    .feature-rack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .feature-card {
+      min-height: 104px;
+      padding: 14px;
+      border: 1px solid #dbe3ef;
+      border-radius: 10px;
+      background: #fff;
+      color: #172033;
+    }
+    .feature-card strong { display: block; font-size: 0.84rem; margin-bottom: 6px; }
+    .feature-card span { display: block; color: #667085; font-size: 0.74rem; line-height: 1.45; font-weight: 700; }
+    [data-reveal] {
+      --reveal-y: 14px;
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      opacity: 0;
+      transform: perspective(1100px) translateY(var(--reveal-y)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+    [data-reveal].is-visible {
+      --reveal-y: 0px;
+      opacity: 1;
+    }
+    .tilt-surface {
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      transform: perspective(1100px) translateY(var(--reveal-y, 0px)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+      transform-style: preserve-3d;
+      transition: transform 160ms ease, box-shadow 180ms ease;
+      will-change: transform;
+    }
+    .tilt-surface.is-tilting {
+      transition: transform 60ms linear, box-shadow 180ms ease;
+    }
+
     .intro-strip {
       transform: translateY(1px);
       background: #fff;
@@ -276,6 +994,7 @@
 
     .section {
       padding: 72px 0;
+      scroll-margin-top: 84px;
     }
     .section-head {
       max-width: 720px;
@@ -299,6 +1018,275 @@
       color: #4b5565;
       font-size: 1rem;
       line-height: 1.7;
+    }
+
+    .system-band {
+      background: #fff;
+      border-top: 1px solid rgba(23, 32, 51, 0.08);
+      border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+    }
+    .system-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(430px, 1.18fr);
+      gap: 34px;
+      align-items: center;
+    }
+    .system-copy {
+      max-width: 560px;
+    }
+    .system-copy p {
+      margin-top: 14px;
+      color: #4b5565;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+    .system-points {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .system-point {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 13px;
+      border: 1px solid rgba(23, 32, 51, 0.1);
+      border-radius: 10px;
+      background: #f9faf6;
+      box-shadow: 0 12px 28px rgba(23, 32, 51, 0.06);
+    }
+    .system-point span {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: #172033;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+    .system-point strong {
+      display: block;
+      font-size: 0.92rem;
+      margin-bottom: 3px;
+    }
+    .system-point p {
+      margin: 0;
+      color: #667085;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+    .ops-console {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(23, 32, 51, 0.12);
+      background: #111827;
+      color: #fff;
+      box-shadow: 0 30px 80px rgba(23, 32, 51, 0.24);
+    }
+    .ops-console::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(147, 197, 253, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(147, 197, 253, 0.08) 1px, transparent 1px);
+      background-size: 34px 34px;
+      pointer-events: none;
+    }
+    .ops-top {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 58px;
+      padding: 0 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(15, 23, 42, 0.76);
+    }
+    .ops-top strong { font-size: 0.92rem; }
+    .ops-top span {
+      color: #93c5fd;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .ops-body {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 14px;
+      padding: 18px;
+    }
+    .ops-panel {
+      border: 1px solid rgba(147, 197, 253, 0.18);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+    }
+    .ops-panel h3 {
+      padding: 13px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bfdbfe;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+    }
+    .input-stack,
+    .output-stack {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+    .input-pill {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: center;
+      min-height: 50px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .input-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: #60a5fa;
+      box-shadow: 0 0 0 6px rgba(96, 165, 250, 0.12);
+      animation: input-pulse 2.6s ease-in-out infinite;
+    }
+    .input-pill:nth-child(2) .input-dot { animation-delay: 180ms; }
+    .input-pill:nth-child(3) .input-dot { animation-delay: 360ms; }
+    .input-pill:nth-child(4) .input-dot { animation-delay: 540ms; }
+    .input-pill:nth-child(2) .input-dot { background: #facc15; box-shadow: 0 0 0 6px rgba(250, 204, 21, 0.14); }
+    .input-pill:nth-child(3) .input-dot { background: #22c55e; box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.12); }
+    .input-pill:nth-child(4) .input-dot { background: #fb7185; box-shadow: 0 0 0 6px rgba(251, 113, 133, 0.12); }
+    @keyframes input-pulse {
+      0%, 100% { transform: scale(1); }
+      45% { transform: scale(1.16); }
+    }
+    .input-pill strong,
+    .output-card strong {
+      display: block;
+      font-size: 0.86rem;
+      line-height: 1.25;
+    }
+    .input-pill span,
+    .output-card span {
+      display: block;
+      margin-top: 3px;
+      color: #cbd5e1;
+      font-size: 0.7rem;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+    .output-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 86px;
+      padding: 13px;
+      border-radius: 10px;
+      background: #f8fafc;
+      color: #172033;
+      border: 1px solid rgba(147, 197, 253, 0.22);
+    }
+    .output-card span { color: #667085; }
+    .output-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(180deg, #2563eb, #22c55e);
+    }
+    .output-card.hot::before { background: linear-gradient(180deg, #f97316, #facc15); }
+    .output-card.ready::before { background: linear-gradient(180deg, #22c55e, #0ea5e9); }
+    .output-card.hot {
+      box-shadow: 0 14px 32px rgba(249, 115, 22, 0.12);
+    }
+    .ops-bridge {
+      display: grid;
+      gap: 12px;
+    }
+    .priority-card {
+      min-height: 118px;
+      padding: 16px;
+      border-radius: 12px;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.22), rgba(34, 197, 94, 0.14)),
+        rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(147, 197, 253, 0.24);
+    }
+    .priority-card span {
+      color: #93c5fd;
+      font-size: 0.7rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .priority-card strong {
+      display: block;
+      margin-top: 7px;
+      font-size: 1.16rem;
+      line-height: 1.2;
+    }
+    .priority-card p {
+      margin-top: 8px;
+      color: #cbd5e1;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+    .pulse-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .pulse-stat {
+      min-height: 70px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .pulse-stat strong {
+      display: block;
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .pulse-stat span {
+      color: #cbd5e1;
+      font-size: 0.68rem;
+      line-height: 1.35;
+      font-weight: 800;
+    }
+    .proof-metric,
+    .intro-tile,
+    .system-point,
+    .feature-card,
+    .flow-step,
+    details.menu-group {
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    @media (hover: hover) {
+      .proof-metric:hover,
+      .intro-tile:hover,
+      .system-point:hover,
+      .feature-card:hover,
+      .flow-step:hover,
+      details.menu-group:hover {
+        transform: translateY(-3px);
+        border-color: rgba(37, 99, 235, 0.18);
+        box-shadow: 0 18px 42px rgba(23, 32, 51, 0.1);
+      }
     }
 
     .menu-wrap {
@@ -487,6 +1475,9 @@
         grid-template-columns: 1fr;
       }
       h1 { font-size: 3rem; }
+      .showcase { grid-template-columns: 1fr; }
+      .system-layout { grid-template-columns: 1fr; }
+      .ops-body { grid-template-columns: 1fr; }
       .menu-wrap { grid-template-columns: 1fr; }
       .menu-note { position: static; }
       .flow-grid { grid-template-columns: repeat(2, 1fr); }
@@ -502,9 +1493,38 @@
       .nav-button { min-height: 38px; padding: 0 12px; }
       h1 { font-size: 2.35rem; }
       .hero-copy { font-size: 0.98rem; }
+      .proof-metrics { grid-template-columns: 1fr; }
+      .hero-proof { grid-template-columns: 1fr; }
       .tool-preview { padding: 14px; }
       .comparison-grid { grid-template-columns: 1fr; }
       .compare-arrow { transform: rotate(90deg); justify-self: center; }
+      .showcase-tabs { grid-template-columns: 1fr; }
+      .browser-bar { align-items: flex-start; flex-direction: column; padding: 12px; }
+      .browser-url { width: 100%; max-width: none; }
+      .build-hero,
+      .build-grid,
+      .feature-rack { grid-template-columns: 1fr; }
+      .system-point { grid-template-columns: 1fr; }
+      .ops-body { padding: 12px; }
+      .pulse-row { grid-template-columns: 1fr; }
+      .routing-lab-head { align-items: flex-start; flex-direction: column; }
+      .routing-flow { grid-template-columns: 1fr; }
+      .routing-track {
+        width: 8px;
+        height: 34px;
+        justify-self: center;
+      }
+      .routing-track span {
+        width: 100%;
+        height: 20px;
+        animation-name: route-packet-down;
+      }
+      @keyframes route-packet-down {
+        0% { transform: translateY(-24px); opacity: 0; }
+        16%, 74% { opacity: 1; }
+        100% { transform: translateY(38px); opacity: 0; }
+      }
+      .build-status { width: max-content; }
       h2 { font-size: 1.78rem; }
       .section { padding: 52px 0; }
       .flow-grid { grid-template-columns: 1fr; }
@@ -513,9 +1533,32 @@
       .close-panel { padding: 22px; }
       .close-panel h2 { font-size: 1.55rem; }
     }
-  </style>
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .tool-preview::before,
+      .primary-cta::before,
+      .input-dot,
+      .action-card,
+      .routing-track span,
+      .live-build.is-routing .routing-lab::after,
+      .showcase-tab.is-active::after,
+      .showcase-tab.is-firing,
+      .showcase-tab.is-firing::before,
+      [data-reveal] {
+        animation: none;
+        transition: none;
+      }
+      [data-reveal] {
+        opacity: 1;
+        transform: none;
+      }
+    }
+</style>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
   <header class="site-header">
     <div class="shell nav">
       <a class="brand" href="#">
@@ -523,6 +1566,8 @@
         <span class="brand-note">Custom tools for local businesses</span>
       </a>
       <nav class="nav-links" aria-label="Main navigation">
+        <a href="#system">Crew OS</a>
+        <a href="#proof">Website Proof</a>
         <a href="#menu">Your Solutions</a>
         <a href="#how">How it works</a>
         <a class="nav-button" href="mailto:steve@crewmultiply.com?subject=Workflow Look">Talk to Steve</a>
@@ -541,12 +1586,40 @@
             <a class="primary-cta" href="#menu">See common fixes</a>
             <a class="secondary-cta" href="mailto:steve@crewmultiply.com?subject=Workflow Look">Talk about my workflow</a>
           </div>
+          <div class="proof-metrics" aria-label="CrewMultiply build proof">
+            <div class="proof-metric">
+              <strong>3</strong>
+              <span>Live demo paths on this page</span>
+            </div>
+            <div class="proof-metric">
+              <strong>1</strong>
+              <span>Owner list before extra software</span>
+            </div>
+            <div class="proof-metric">
+              <strong>Manual first</strong>
+              <span>Automation only after the workflow proves itself</span>
+            </div>
+          </div>
           <div class="hero-tags" aria-label="Common small business fixes">
             <span>Missed calls</span>
             <span>Quote follow-up</span>
             <span>Review requests</span>
             <span>Appointment reminders</span>
             <span>Website checks</span>
+          </div>
+          <div class="hero-proof" aria-label="Types of custom website tools">
+            <div class="proof-chip">
+              <strong>Smart forms</strong>
+              <span>Ask better questions before the owner calls back.</span>
+            </div>
+            <div class="proof-chip">
+              <strong>Owner dashboards</strong>
+              <span>Turn website leads into a clean daily action list.</span>
+            </div>
+            <div class="proof-chip">
+              <strong>Service paths</strong>
+              <span>Guide customers to the right next step without a maze.</span>
+            </div>
           </div>
         </div>
 
@@ -612,6 +1685,183 @@
         <div class="intro-tile">
           <strong>Useful before automatic.</strong>
           <p>Some tools may use AI behind the scenes. You do not need to understand it. You just need the follow-up to happen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="system" class="section system-band" aria-label="CrewMultiply operating system preview">
+      <div class="shell system-layout">
+        <div class="system-copy" data-reveal>
+          <div class="section-kicker">Crew OS</div>
+          <h2>A website that becomes the front door to the business.</h2>
+          <p>The stronger version is not just a prettier homepage. It is a small operating layer: the site collects better context, sorts the request, and hands the owner a short action list.</p>
+          <div class="system-points">
+            <div class="system-point">
+              <span>01</span>
+              <div>
+                <strong>Inputs get organized</strong>
+                <p>Forms, calls, quotes, reviews, photos, and notes stop living in separate piles.</p>
+              </div>
+            </div>
+            <div class="system-point">
+              <span>02</span>
+              <div>
+                <strong>The next action gets chosen</strong>
+                <p>The owner sees who needs a call, which detail is missing, and what can wait.</p>
+              </div>
+            </div>
+            <div class="system-point">
+              <span>03</span>
+              <div>
+                <strong>The site can keep improving</strong>
+                <p>Once the manual version works, the useful parts can become reminders, drafts, and dashboards.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ops-console" data-reveal>
+          <div class="ops-top">
+            <strong>Owner Command System</strong>
+            <span>Live build concept</span>
+          </div>
+          <div class="ops-body">
+            <div class="ops-panel">
+              <h3>Business inputs</h3>
+              <div class="input-stack">
+                <div class="input-pill">
+                  <span class="input-dot"></span>
+                  <div><strong>Website form</strong><span>New repair request with photos</span></div>
+                </div>
+                <div class="input-pill">
+                  <span class="input-dot"></span>
+                  <div><strong>Open quote</strong><span>Estimate sent, no answer yet</span></div>
+                </div>
+                <div class="input-pill">
+                  <span class="input-dot"></span>
+                  <div><strong>Finished job</strong><span>Customer is happy, review not asked</span></div>
+                </div>
+                <div class="input-pill">
+                  <span class="input-dot"></span>
+                  <div><strong>Missed call</strong><span>Callback window is closing</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ops-bridge">
+              <div class="priority-card">
+                <span>Priority engine</span>
+                <strong>Turn scattered signals into an owner-ready morning list.</strong>
+                <p>This is the kind of custom layer small businesses usually never get: not a template, not a giant platform, just the missing bridge between their real work and the next action.</p>
+              </div>
+              <div class="pulse-row">
+                <div class="pulse-stat"><strong>Now</strong><span>Call back while the lead is warm</span></div>
+                <div class="pulse-stat"><strong>Due</strong><span>Quote follow-up ready to send</span></div>
+                <div class="pulse-stat"><strong>Ready</strong><span>Review ask drafted from job notes</span></div>
+              </div>
+              <div class="ops-panel">
+                <h3>Owner outputs</h3>
+                <div class="output-stack">
+                  <div class="output-card hot"><strong>Call before close</strong><span>Lead has timing, photos, and a clear callback window.</span></div>
+                  <div class="output-card"><strong>Send quote nudge</strong><span>Message is ready, polite, and tied to the actual job.</span></div>
+                  <div class="output-card ready"><strong>Ask for the review</strong><span>Finished work becomes proof before it disappears.</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proof" class="section showcase-band" aria-label="Interactive website proof">
+      <div class="shell showcase">
+        <div class="showcase-copy" data-reveal>
+          <div class="section-kicker">Website proof</div>
+          <h2>The page can be the tool.</h2>
+          <p>A modern small-business website should do more than look nice. It can guide a visitor, collect the right details, show the owner what matters, and make the next action obvious.</p>
+          <div class="showcase-tabs" role="tablist" aria-label="Website build examples">
+            <button class="showcase-tab is-active" type="button" data-showcase="followup" data-step="01" role="tab" aria-selected="true">
+              <strong>Follow-up cockpit</strong>
+              <span>Website leads become an owner action list.</span>
+            </button>
+            <button class="showcase-tab" type="button" data-showcase="selector" data-step="02" role="tab" aria-selected="false">
+              <strong>Service selector</strong>
+              <span>Customers pick the right path before calling.</span>
+            </button>
+            <button class="showcase-tab" type="button" data-showcase="proof" data-step="03" role="tab" aria-selected="false">
+              <strong>Proof engine</strong>
+              <span>Finished work turns into reviews and site stories.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="live-build" data-reveal>
+          <div class="browser-bar">
+            <div class="browser-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="browser-url" id="build-url">crewmultiply.com/custom/follow-up</div>
+          </div>
+          <div class="build-screen">
+            <div class="build-hero">
+              <div>
+                <h3 id="build-title">A follow-up cockpit for a busy service business</h3>
+                <p id="build-copy">The visitor thinks they filled out a normal website form. The owner gets a short list of who to call, what to ask, and what cannot wait.</p>
+              </div>
+              <span class="build-status" id="build-status">Owner-ready</span>
+            </div>
+
+            <div class="routing-lab" aria-label="Live website routing demo">
+              <div class="routing-lab-head">
+                <span>Live routing demo</span>
+                <strong id="routing-label">Urgent lead sorted</strong>
+              </div>
+              <div class="routing-flow">
+                <div class="routing-node">
+                  <span>Customer</span>
+                  <strong id="routing-input">Repair quote</strong>
+                </div>
+                <div class="routing-track" aria-hidden="true"><span></span></div>
+                <div class="routing-node is-core">
+                  <span>CREW× site</span>
+                  <strong id="routing-middle">Flags urgency</strong>
+                </div>
+                <div class="routing-track" aria-hidden="true"><span></span></div>
+                <div class="routing-node">
+                  <span>Owner</span>
+                  <strong id="routing-output">Call before close</strong>
+                </div>
+              </div>
+              <div class="routing-draft">
+                <span>Ready message</span>
+                <p id="routing-draft">I saw your note about the leak and your callback window. I can call after 4 PM and ask for one photo before we price the next step.</p>
+              </div>
+            </div>
+
+            <div class="build-grid">
+              <div class="build-panel">
+                <div class="panel-label">What the customer sees</div>
+                <div class="visitor-stack" id="visitor-stack"></div>
+              </div>
+              <div class="build-panel">
+                <div class="panel-label">What the owner gets</div>
+                <div class="owner-stack" id="owner-stack"></div>
+              </div>
+            </div>
+
+            <div class="feature-rack" aria-label="Website features CrewMultiply can build">
+              <div class="feature-card">
+                <strong>Lead sorting</strong>
+                <span>Separate urgent work, quote requests, questions, and tire-kickers.</span>
+              </div>
+              <div class="feature-card">
+                <strong>Photo intake</strong>
+                <span>Collect job photos, notes, and location details before the callback.</span>
+              </div>
+              <div class="feature-card">
+                <strong>Owner view</strong>
+                <span>Give the business one clean page instead of another inbox to babysit.</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -811,7 +2061,7 @@
         <div class="close-panel">
           <div>
             <h2>Send me the messy version.</h2>
-            <p>Send the thing that is half-working right now: the inbox, quote sheet, call process, review routine, appointment list, or website draft. You will get one practical next question back. No call unless you want one.</p>
+            <p>First builds are open now. Send the thing that is half-working right now: the inbox, quote sheet, call process, review routine, appointment list, or website draft. You will get one practical next question back. No call unless you want one.</p>
           </div>
           <a href="mailto:steve@crewmultiply.com?subject=Help me clean this up">Talk to Steve</a>
         </div>
@@ -825,5 +2075,248 @@
       <span>You own the tools made for your business.</span>
     </div>
   </footer>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const header = document.querySelector(".site-header");
+    const progressFill = document.querySelector(".scroll-progress span");
+    const navAnchors = [...document.querySelectorAll(".nav-links a[href^='#']")];
+    const navSections = navAnchors
+      .map((link) => ({ link, section: document.querySelector(link.getAttribute("href")) }))
+      .filter((item) => item.section);
+
+    function updatePageChrome() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? Math.min(scrollTop / scrollable, 1) : 0;
+
+      if (progressFill) {
+        progressFill.style.width = `${progress * 100}%`;
+      }
+      if (header) {
+        header.classList.toggle("is-scrolled", scrollTop > 12);
+      }
+
+      let current = null;
+      const checkLine = window.innerHeight * 0.38;
+      navSections.forEach((item) => {
+        const box = item.section.getBoundingClientRect();
+        if (box.top <= checkLine && box.bottom > checkLine) {
+          current = item;
+        }
+      });
+      navAnchors.forEach((link) => link.classList.toggle("is-current", current && link === current.link));
+    }
+
+    const revealSelector = [
+      ".proof-metric",
+      ".hero-tags span",
+      ".proof-chip",
+      ".intro-tile",
+      ".system-point",
+      ".ops-console",
+      ".showcase-copy",
+      ".live-build",
+      "details.menu-group",
+      ".flow-step",
+      ".close-panel"
+    ].join(",");
+
+    document.querySelectorAll(revealSelector).forEach((item, index) => {
+      if (!item.hasAttribute("data-reveal")) {
+        item.setAttribute("data-reveal", "");
+      }
+      item.style.transitionDelay = `${(index % 5) * 45}ms`;
+    });
+
+    document.querySelectorAll(".tool-preview, .ops-console, .live-build").forEach((surface) => {
+      surface.classList.add("tilt-surface");
+      if (prefersReducedMotion) return;
+
+      surface.addEventListener("pointermove", (event) => {
+        const box = surface.getBoundingClientRect();
+        const x = (event.clientX - box.left) / box.width - 0.5;
+        const y = (event.clientY - box.top) / box.height - 0.5;
+        surface.classList.add("is-tilting");
+        surface.style.setProperty("--tilt-x", `${(-y * 4).toFixed(2)}deg`);
+        surface.style.setProperty("--tilt-y", `${(x * 5).toFixed(2)}deg`);
+      });
+
+      surface.addEventListener("pointerleave", () => {
+        surface.classList.remove("is-tilting");
+        surface.style.setProperty("--tilt-x", "0deg");
+        surface.style.setProperty("--tilt-y", "0deg");
+      });
+    });
+
+    updatePageChrome();
+    window.addEventListener("scroll", updatePageChrome, { passive: true });
+    window.addEventListener("resize", updatePageChrome);
+
+    const showcaseBuilds = {
+      followup: {
+        url: "crewmultiply.com/custom/follow-up",
+        title: "A follow-up cockpit for a busy service business",
+        copy: "The visitor thinks they filled out a normal website form. The owner gets a short list of who to call, what to ask, and what cannot wait.",
+        status: "Owner-ready",
+        visitor: [
+          ["Request type", "Repair quote"],
+          ["Best callback window", "Today after 4 PM"],
+          ["Job detail", "Water heater leaking near utility room"]
+        ],
+        owner: [
+          ["Call before close", "New lead has an urgent timing note and a clear callback window."],
+          ["Ask for photos", "Customer mentioned a leak. Photo request is ready."],
+          ["Quote path", "If available today, move to same-day estimate follow-up."]
+        ],
+        routing: {
+          label: "Urgent lead sorted",
+          input: "Repair quote",
+          middle: "Flags urgency",
+          output: "Call before close",
+          draft: "I saw your note about the leak and your callback window. I can call after 4 PM and ask for one photo before we price the next step."
+        }
+      },
+      selector: {
+        url: "crewmultiply.com/custom/service-selector",
+        title: "A guided service path instead of a generic contact form",
+        copy: "The site asks a few useful questions and sends the customer down the right path. The owner gets better context before spending time on the call.",
+        status: "Customer-guided",
+        visitor: [
+          ["What do you need?", "Install, repair, or estimate"],
+          ["How soon?", "This week"],
+          ["What should we know?", "Photos, access notes, and budget range"]
+        ],
+        owner: [
+          ["Right fit", "Lead is tagged by service type before it hits the inbox."],
+          ["Better callback", "Owner can open with the right question instead of starting cold."],
+          ["Cleaner quote", "Missing details are flagged before the estimate is drafted."]
+        ],
+        routing: {
+          label: "Path chosen",
+          input: "Install, repair, or estimate",
+          middle: "Sorts service type",
+          output: "Better callback",
+          draft: "Thanks for choosing the service path. I have the timing, photos, and budget range, so I can call back with the right next question."
+        }
+      },
+      proof: {
+        url: "crewmultiply.com/custom/proof-engine",
+        title: "Finished jobs become reviews, proof, and better follow-up",
+        copy: "After a job wraps, the site can help collect the thank-you, review ask, photos, and simple project story while the work is still fresh.",
+        status: "Proof-ready",
+        visitor: [
+          ["Job complete", "Customer marked happy"],
+          ["Photo note", "Before and after images added"],
+          ["Permission", "Okay to use short project summary"]
+        ],
+        owner: [
+          ["Review ask", "Thank-you message is ready to send."],
+          ["Website story", "Short project blurb is drafted for the site."],
+          ["Next reminder", "Follow-up date is saved if the customer does not respond."]
+        ],
+        routing: {
+          label: "Proof captured",
+          input: "Happy customer",
+          middle: "Turns job into proof",
+          output: "Review ask ready",
+          draft: "Thank you again for trusting us with the project. If everything still looks good, would you be open to leaving a quick review?"
+        }
+      }
+    };
+
+    function buildFieldCard(label, value) {
+      const card = document.createElement("div");
+      card.className = "field-card";
+
+      const labelEl = document.createElement("span");
+      labelEl.textContent = label;
+
+      const valueEl = document.createElement("strong");
+      valueEl.textContent = value;
+
+      card.append(labelEl, valueEl);
+      return card;
+    }
+
+    function buildActionCard(item, index) {
+      const card = document.createElement("div");
+      card.className = "action-card";
+
+      const num = document.createElement("span");
+      num.className = "action-num";
+      num.textContent = String(index + 1);
+
+      const body = document.createElement("span");
+      const title = document.createElement("strong");
+      title.textContent = item[0];
+      const copy = document.createElement("span");
+      copy.textContent = item[1];
+      body.append(title, copy);
+
+      card.append(num, body);
+      return card;
+    }
+
+    function renderShowcase(key) {
+      const build = showcaseBuilds[key] || showcaseBuilds.followup;
+      const liveBuild = document.querySelector(".live-build");
+      const visitorStack = document.getElementById("visitor-stack");
+      const ownerStack = document.getElementById("owner-stack");
+
+      document.getElementById("build-url").textContent = build.url;
+      document.getElementById("build-title").textContent = build.title;
+      document.getElementById("build-copy").textContent = build.copy;
+      document.getElementById("build-status").textContent = build.status;
+      document.getElementById("routing-label").textContent = build.routing.label;
+      document.getElementById("routing-input").textContent = build.routing.input;
+      document.getElementById("routing-middle").textContent = build.routing.middle;
+      document.getElementById("routing-output").textContent = build.routing.output;
+      document.getElementById("routing-draft").textContent = build.routing.draft;
+
+      visitorStack.replaceChildren(...build.visitor.map((item) => buildFieldCard(item[0], item[1])));
+      ownerStack.replaceChildren(...build.owner.map((item, index) => buildActionCard(item, index)));
+
+      if (liveBuild) {
+        liveBuild.classList.remove("is-routing");
+        void liveBuild.offsetWidth;
+        liveBuild.classList.add("is-routing");
+      }
+
+      document.querySelectorAll(".showcase-tab").forEach((tab) => {
+        const selected = tab.dataset.showcase === key;
+        tab.classList.toggle("is-active", selected);
+        tab.setAttribute("aria-selected", String(selected));
+        if (selected) {
+          tab.classList.remove("is-firing");
+          void tab.offsetWidth;
+          tab.classList.add("is-firing");
+        } else {
+          tab.classList.remove("is-firing");
+        }
+      });
+    }
+
+    document.querySelectorAll(".showcase-tab").forEach((tab) => {
+      tab.addEventListener("click", () => renderShowcase(tab.dataset.showcase));
+    });
+
+    renderShowcase("followup");
+
+    const revealItems = document.querySelectorAll("[data-reveal]");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
+  </script>
 </body>
 </html>
